@@ -14,7 +14,6 @@ const Container = styled.div`
             font-family: ${theme.fonts[0]};
         `};
   padding: 0 0.5em;
-  font-size: 2rem;
 `;
 
 export default Title;

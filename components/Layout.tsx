@@ -6,7 +6,7 @@ const Layout: React.FC = (props) => {
   return (
     <>
       <PageHeader>
-        <Title>STARDB</Title>
+        <Title><h1>STARDB</h1></Title>
       </PageHeader>
       <PageContent>{props.children}</PageContent>
     </>

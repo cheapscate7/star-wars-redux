@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
             background-color: 1px solid ${theme.colors.background};
         `};
     }
+    
+    h1{
+      margin: 0;
+    }
 `;
 
 export default GlobalStyle;
