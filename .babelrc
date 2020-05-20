@@ -7,6 +7,10 @@
       {
         "ssr": true,
         "displayName": true
-      }]
+      }
+    ],
+    [
+      "graphql-tag"
+    ]
   ]
 }
