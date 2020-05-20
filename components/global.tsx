@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
     
     h1{
       margin: 0;
+      ${({theme}) => css`
+            font-size: ${theme.fontSizes.large};
+        `};
     }
 `;
 
