@@ -5,9 +5,19 @@
   "repository": "https://github.com/cheapscate7/star-wars-redux.git",
   "author": "Matthew Badcock <matthewlisterb@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "devDependencies": {
     "@types/node": "^14.0.4",
     "@types/react": "^16.9.35",
     "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "next": "9.3.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   }
 }
