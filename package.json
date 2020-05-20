@@ -1,0 +1,13 @@
+{
+  "name": "star-wars-redux",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/cheapscate7/star-wars-redux.git",
+  "author": "Matthew Badcock <matthewlisterb@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.4",
+    "@types/react": "^16.9.35",
+    "typescript": "^3.9.3"
+  }
+}
