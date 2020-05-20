@@ -6,6 +6,9 @@
 # misc
 .DS_Store
 
+#build
+/.next
+
 yarn-error.log*
 yarn.lock
 

@@ -8,12 +8,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "cypress:open": "cypress open"
   },
   "devDependencies": {
     "@types/node": "^14.0.4",
     "@types/react": "^16.9.35",
     "babel-plugin-styled-components": "^1.10.7",
+    "cypress": "^4.6.0",
     "typescript": "^3.9.3"
   },
   "dependencies": {
