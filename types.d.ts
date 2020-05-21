@@ -19,9 +19,9 @@ declare interface Theme {
         foreground: string,
         background: string,
         highlight_1: string,
-        highlight_2: string,
+        highlight_2?: string,
         highlight_1_contrast: string,
-        highlight_2_contrast: string
+        highlight_2_contrast?: string
     },
     fontWeights: {
         light: number,
