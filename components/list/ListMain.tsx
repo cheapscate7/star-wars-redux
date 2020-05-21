@@ -13,7 +13,7 @@ export default ListMain;
 
 const Container = styled.ul`
     list-style-type: none;
-
+    padding: 0;
     ${({ theme }) => css`
         font-family: ${theme.fonts[1] || theme.fonts[0]};
     `};

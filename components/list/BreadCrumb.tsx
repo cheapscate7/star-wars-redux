@@ -10,6 +10,7 @@ const BreadCrumbContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     padding: 1em 1.5em;
