@@ -4,6 +4,7 @@ import BreadCrumb from './BreadCrumb';
 import ListMain from './ListMain';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import FilmItem from './listItems/FilmItem';
 
 const ALL_FILMS = gql`
     query {
@@ -14,10 +15,12 @@ const ALL_FILMS = gql`
     }
 `;
 
+interface IAll_films_data {
+    allFilms: IFilm[];
+}
+
 const ListContainer: React.FC = ({ children }) => {
-    const { loading, error, data, fetchMore, networkStatus } = useQuery(
-        ALL_FILMS
-    );
+    const { loading, error, data } = useQuery<IAll_films_data>(ALL_FILMS);
     return (
         <Container>
             <BreadCrumb>
@@ -29,7 +32,15 @@ const ListContainer: React.FC = ({ children }) => {
             </BreadCrumb>
 
             <ListGroups>
-                <ListMain loading={loading}>{data && <FilmItem />}</ListMain>
+                <ListMain loading={loading}>
+                    {data &&
+                        data.allFilms.map((film, index) => (
+                            <FilmItem
+                                key={`${film.title}_${index}`}
+                                film={film}
+                            />
+                        ))}
+                </ListMain>
             </ListGroups>
         </Container>
     );
