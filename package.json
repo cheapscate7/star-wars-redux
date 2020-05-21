@@ -1,37 +1,45 @@
 {
-  "name": "star-wars-redux",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/cheapscate7/star-wars-redux.git",
-  "author": "Matthew Badcock <matthewlisterb@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "cypress:open": "cypress open"
-  },
-  "devDependencies": {
-    "@types/node": "^14.0.4",
-    "@types/react": "^16.9.35",
-    "babel-plugin-graphql-tag": "^2.5.0",
-    "babel-plugin-styled-components": "^1.10.7",
-    "cypress": "^4.6.0",
-    "typescript": "^3.9.3"
-  },
-  "dependencies": {
-    "@apollo/react-hooks": "3.1.3",
-    "@apollo/react-ssr": "3.1.3",
-    "apollo-cache-inmemory": "1.6.5",
-    "apollo-client": "2.6.8",
-    "apollo-link-http": "1.5.16",
-    "graphql": "^14.0.2",
-    "graphql-tag": "2.10.3",
-    "next": "9.3.5",
-    "next-fonts": "^1.1.0",
-    "node-fetch": "^2.6.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "styled-components": "^5.1.0"
-  }
+    "name": "star-wars-redux",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/cheapscate7/star-wars-redux.git",
+    "author": "Matthew Badcock <matthewlisterb@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "cypress:open": "cypress open"
+    },
+    "devDependencies": {
+        "@types/node": "^14.0.4",
+        "@types/react": "^16.9.35",
+        "babel-plugin-graphql-tag": "^2.5.0",
+        "babel-plugin-styled-components": "^1.10.7",
+        "cypress": "^4.6.0",
+        "husky": "^4.2.5",
+        "prettier": "^2.0.5",
+        "pretty-quick": "^2.0.1",
+        "typescript": "^3.9.3"
+    },
+    "dependencies": {
+        "@apollo/react-hooks": "3.1.3",
+        "@apollo/react-ssr": "3.1.3",
+        "apollo-cache-inmemory": "1.6.5",
+        "apollo-client": "2.6.8",
+        "apollo-link-http": "1.5.16",
+        "graphql": "^14.0.2",
+        "graphql-tag": "2.10.3",
+        "next": "9.3.5",
+        "next-fonts": "^1.1.0",
+        "node-fetch": "^2.6.0",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
+        "styled-components": "^5.1.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    }
 }
