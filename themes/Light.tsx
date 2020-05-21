@@ -22,7 +22,10 @@ const LightTheme: Theme = {
         'inset 0 0 0 1px #ddd, 0 0 10px 0 rgba(0,0,0,.1)',
         '0px 0px 6px 0px rgba(0,0,0,0.75)',
     ],
-    fonts: ['"SW-Galaxy", -apple-system, sans-serif'],
+    fonts: [
+        '"SW-Galaxy", -apple-system, sans-serif',
+        '"Montserrat", -apple-system, sans-serif',
+    ],
 };
 
 export default LightTheme;

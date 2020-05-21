@@ -14,13 +14,17 @@ const BreadCrumbContainer = styled.div`
     padding: 1em 1.5em;
     ${({ theme }) => css`
         background-color: ${theme.colors.highlight_1};
-        color: ${theme.colors.foreground};
+        color: ${theme.colors.background};
+        font-family: ${theme.fonts[1] || theme.fonts[0]};
     `};
     > *:first-child {
         margin-right: 0.5em;
     }
     > *:last-child {
         margin-left: 0.5em;
+    }
+    > *:not(:first-child):not(:last-child) {
+        margin: auto 0.25em;
     }
 `;
 

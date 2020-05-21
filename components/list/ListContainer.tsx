@@ -7,7 +7,9 @@ const ListContainer: React.FC = ({ children }) => {
         <Container>
             <BreadCrumb>
                 <div>Hello</div>
+                <Divider>|</Divider>
                 <div>Hello</div>
+                <Divider>|</Divider>
                 <div>Hello</div>
             </BreadCrumb>
             <ListGroups></ListGroups>
@@ -29,3 +31,5 @@ const ListGroups = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     width: 100%;
 `;
+
+const Divider = styled.span``;
