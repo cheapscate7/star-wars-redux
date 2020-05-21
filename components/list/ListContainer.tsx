@@ -1,8 +1,23 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
 import BreadCrumb from './BreadCrumb';
+import ListMain from './ListMain';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
+const ALL_FILMS = gql`
+    query {
+        allFilms {
+            id
+            title
+        }
+    }
+`;
 
 const ListContainer: React.FC = ({ children }) => {
+    const { loading, error, data, fetchMore, networkStatus } = useQuery(
+        ALL_FILMS
+    );
     return (
         <Container>
             <BreadCrumb>
@@ -12,7 +27,10 @@ const ListContainer: React.FC = ({ children }) => {
                 <Divider>|</Divider>
                 <div>Hello</div>
             </BreadCrumb>
-            <ListGroups></ListGroups>
+
+            <ListGroups>
+                <ListMain loading={loading}>{data && <FilmItem />}</ListMain>
+            </ListGroups>
         </Container>
     );
 };
