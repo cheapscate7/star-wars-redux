@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
+import { rgba } from 'polished';
 
 const BreadCrumb: React.FC = ({ children }) => {
     return <BreadCrumbContainer>{children}</BreadCrumbContainer>;
@@ -13,7 +14,7 @@ const BreadCrumbContainer = styled.div`
     border-bottom-right-radius: 20px;
     padding: 1em 1.5em;
     ${({ theme }) => css`
-        background-color: ${theme.colors.highlight_1};
+        background-color: ${rgba(theme.colors.highlight_1, 0.8)};
         color: ${theme.colors.background};
         font-family: ${theme.fonts[1] || theme.fonts[0]};
     `};
