@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Head from "next/head";
+import Layout from "../components/Layout";
 import { withApollo } from '../lib/apollo';
 import gql from 'graphql-tag'
 import {useQuery} from "@apollo/react-hooks";
@@ -28,7 +29,9 @@ const Home: NextPage<HomeProps> = () => {
                     content=""
                 />
             </Head>
-            {(data && data.allFilms) && <p>{data.allFilms[0].title}</p>}
+            <Layout>
+                <h1>Hello</h1>
+            </Layout>
         </>
     );
 };

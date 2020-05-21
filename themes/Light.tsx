@@ -3,9 +3,7 @@ const LightTheme: Theme = {
         foreground: "black",
         background: "white",
         highlight_1: "#1febfd",
-        highlight_2: "#fd311f",
         highlight_1_contrast: "#ebfd1f",
-        highlight_2_contrast: "#311ffd"
     },
     fontWeights: {
         light: 300,
@@ -25,7 +23,7 @@ const LightTheme: Theme = {
         '0px 0px 6px 0px rgba(0,0,0,0.75)',
     ],
     fonts: [
-        '"Roboto", -apple-system, sans-serif',
+        '"SW-Galaxy", -apple-system, sans-serif',
     ],
 };
 
