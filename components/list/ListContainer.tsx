@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
 import BreadCrumb from './BreadCrumb';
-import ListMain from './ListMain';
+import List from './ListMain';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
+import withSearch from '../../lib/withSearch';
 
 const ALL_FILMS = gql`
     query {
@@ -21,6 +22,7 @@ interface IAll_films_data {
 
 const ListContainer: React.FC = ({ children }) => {
     const { loading, error, data } = useQuery<IAll_films_data>(ALL_FILMS);
+    const { searchState, searchDispatch } = withSearch();
     return (
         <Container>
             <BreadCrumb>
@@ -32,7 +34,7 @@ const ListContainer: React.FC = ({ children }) => {
             </BreadCrumb>
 
             <ListGroups>
-                <ListMain loading={loading}>
+                <List loading={loading}>
                     {data &&
                         data.allFilms.map((film, index) => (
                             <FilmItem
@@ -40,7 +42,7 @@ const ListContainer: React.FC = ({ children }) => {
                                 film={film}
                             />
                         ))}
-                </ListMain>
+                </List>
             </ListGroups>
         </Container>
     );
