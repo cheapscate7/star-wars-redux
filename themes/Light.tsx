@@ -3,7 +3,7 @@ const LightTheme: Theme = {
         foreground: 'black',
         background: 'white',
         highlight_1: '#001cd5',
-        highlight_1_contrast: '#ebfd1f',
+        highlight_1_contrast: '#d59900',
     },
     fontWeights: {
         light: 300,

@@ -1,7 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
-import { DocumentNode } from 'graphql';
 
 type ListMainProps = {
     loading: boolean;
@@ -15,4 +13,8 @@ export default ListMain;
 
 const Container = styled.ul`
     list-style-type: none;
+
+    ${({ theme }) => css`
+        font-family: ${theme.fonts[1] || theme.fonts[0]};
+    `};
 `;
