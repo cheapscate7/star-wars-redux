@@ -14,7 +14,7 @@ const SpeciesItem: React.FC<SpeciesItemProps> = ({
     return (
         <Item>
             <AddOptionButton onClick={() => {}}>
-                <AddIcon type="image/svg+xml" data={'/plus-sign.svg'} />
+                <img alt={'add'} src={'/plus-sign.svg'} />
             </AddOptionButton>
             {species.name}
         </Item>

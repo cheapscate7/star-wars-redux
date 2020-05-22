@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
 import withSearch from '../../lib/withSearch';
 import SpeciesItem from './listItems/SpeciesItem';
+import LoadingElement from '../LoadingElement';
 
 const ALL_FILMS = gql`
     query {
@@ -66,8 +67,8 @@ const ListContainer: React.FC = ({ children }) => {
                         ))}
                 </List>
                 {searchState.currentFilmId && (
-                    <>
-                        <List loading={querydata.loading}>
+                    <LoadingElement loading={querydata.loading}>
+                        <List>
                             {querydata.data &&
                                 querydata.data.Film.species.map(
                                     (species, index) => (
@@ -82,7 +83,7 @@ const ListContainer: React.FC = ({ children }) => {
                                     )
                                 )}
                         </List>
-                        <List loading={querydata.loading}>
+                        <List>
                             {querydata.data &&
                                 querydata.data.Film.planets.map(
                                     (planet, index) => (
@@ -97,7 +98,7 @@ const ListContainer: React.FC = ({ children }) => {
                                     )
                                 )}
                         </List>
-                    </>
+                    </LoadingElement>
                 )}
             </ListGroups>
         </Container>

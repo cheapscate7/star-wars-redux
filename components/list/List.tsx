@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 type ListProps = {
-    loading: boolean;
+    loading?: boolean;
 };
 
 const List: React.FC<ListProps> = ({ loading, children }) => {
