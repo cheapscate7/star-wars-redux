@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
 import BreadCrumb from './BreadCrumb';
-import List from './ListMain';
+import List from './List';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
-import withSearch from '../../lib/withSearch';
+import withSearch, { searchActions } from '../../lib/withSearch';
 
 const ALL_FILMS = gql`
     query {
@@ -23,6 +23,10 @@ interface IAll_films_data {
 const ListContainer: React.FC = ({ children }) => {
     const { loading, error, data } = useQuery<IAll_films_data>(ALL_FILMS);
     const { searchState, searchDispatch } = withSearch();
+    // const FilmItemClickEvent = (id: string) => {
+    //     console.log(id)
+    //     searchDispatch(searchActions.setCurrentFilmId(id))
+    // };
     return (
         <Container>
             <BreadCrumb>
@@ -40,6 +44,7 @@ const ListContainer: React.FC = ({ children }) => {
                             <FilmItem
                                 key={`${film.title}_${index}`}
                                 film={film}
+                                clickAction={searchDispatch}
                             />
                         ))}
                 </List>
