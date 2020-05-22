@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import React from 'react';
 import BreadCrumb from './BreadCrumb';
 import List from './List';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
-import withSearch, { searchActions } from '../../lib/withSearch';
+import withSearch from '../../lib/withSearch';
 
 const ALL_FILMS = gql`
     query {
@@ -16,17 +16,32 @@ const ALL_FILMS = gql`
     }
 `;
 
-interface IAll_films_data {
-    allFilms: IFilm[];
-}
+const FILM_CHILDREN = gql`
+    query($id: ID) {
+        Film(id: $id) {
+            title
+            species {
+                id
+                name
+            }
+            planets {
+                id
+                name
+            }
+        }
+    }
+`;
 
 const ListContainer: React.FC = ({ children }) => {
     const { loading, error, data } = useQuery<IAll_films_data>(ALL_FILMS);
     const { searchState, searchDispatch } = withSearch();
-    // const FilmItemClickEvent = (id: string) => {
-    //     console.log(id)
-    //     searchDispatch(searchActions.setCurrentFilmId(id))
-    // };
+    const querydata = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
+        variables: {
+            id: searchState.currentFilmId,
+        },
+        skip: !searchState.currentFilmId,
+    });
+
     return (
         <Container>
             <BreadCrumb>
@@ -48,6 +63,22 @@ const ListContainer: React.FC = ({ children }) => {
                             />
                         ))}
                 </List>
+                {searchState.currentFilmId && (
+                    <>
+                        <List loading={querydata.loading}>
+                            {querydata.data &&
+                                querydata.data.Film.species.map(
+                                    (species, index) => (
+                                        <li
+                                            key={`species_${index}_${species.name}`}
+                                        >
+                                            {species.name}
+                                        </li>
+                                    )
+                                )}
+                        </List>
+                    </>
+                )}
             </ListGroups>
         </Container>
     );
@@ -64,8 +95,12 @@ const Container = styled.div`
 
 const ListGroups = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     width: 100%;
 `;
 
-const Divider = styled.span``;
+const Divider = styled.span`
+    &:last-child {
+        display: none;
+    }
+`;

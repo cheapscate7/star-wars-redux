@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
         border: 0;
         margin: 0;
         ${({ theme }) => css`
-            background-color: 1px solid ${theme.colors.background};
+            background-color: ${theme.colors.background};
         `};
     }
     

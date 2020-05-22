@@ -30,7 +30,6 @@ const Item = styled.li`
     align-items: stretch;
     position: relative;
     padding: 1em 2em;
-    cursor: pointer;
     transition: 0.2s ease;
     ${({ theme }) => css`
         border: 1px solid ${theme.colors.foreground};
@@ -104,6 +103,7 @@ const NextOptionButton = styled.button`
     padding: 0.2em;
     background-color: white;
     border: 0;
+    cursor: pointer;
     img {
         width: 16px;
         height: 16px;

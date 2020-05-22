@@ -2,12 +2,28 @@ declare interface ISWNode {
     id: string;
 }
 
-declare interface IPlanet extends ISWNode {}
+declare interface IPlanet extends ISWNode {
+    name: string;
+}
 
-declare interface ISpecies extends ISWNode {}
+declare interface ISpecies extends ISWNode {
+    name: string;
+}
 
 declare interface IFilm extends ISWNode {
     title: string;
+}
+
+declare interface IAll_films_data {
+    allFilms: IFilm[];
+}
+
+declare interface IFilmChildrenData {
+    Film: {
+        title: string;
+        species: ISpecies[];
+        planet: IPlanet[];
+    };
 }
 
 declare interface ICharactersQueryVariables {
