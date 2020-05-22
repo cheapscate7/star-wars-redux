@@ -6,17 +6,26 @@ interface SpeciesItemProps extends IListItemProps {
     species: ISpecies;
 }
 
+/**
+ * renders an individual Species' data in a <List> component
+ * @param species  type: ISpecies     the species data to be rendered
+ * @param selected  type: boolean   triggers special css if film is selected
+ * @param clickAction   type: function  action when button is pressed
+ * @param children  type: DocumentNode
+ * @constructor
+ */
 const SpeciesItem: React.FC<SpeciesItemProps> = ({
     species,
     clickAction,
     selected,
+    children,
 }) => {
     return (
         <Item>
             <AddOptionButton onClick={() => {}}>
                 <img alt={'add'} src={'/plus-sign.svg'} />
             </AddOptionButton>
-            {species.name}
+            {children}
         </Item>
     );
 };

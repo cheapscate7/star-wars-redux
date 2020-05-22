@@ -34,10 +34,16 @@ const FILM_CHILDREN = gql`
     }
 `;
 
-const ListContainer: React.FC = ({ children }) => {
-    const { loading, data } = useQuery<IAll_films_data>(ALL_FILMS);
+/**
+ * A grid for placing <List> items in based on CSS grids
+ * one List acts as a master, selecting a value from the master list causes all child lists to be render
+ * also has a breadcrumb
+ * @constructor
+ */
+const ListContainer: React.FC = () => {
+    const masterQuery = useQuery<IAll_films_data>(ALL_FILMS);
     const { searchState, searchDispatch } = withSearch();
-    const querydata = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
+    const childQuery = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
         variables: {
             id: searchState.currentFilmId,
         },
@@ -47,7 +53,7 @@ const ListContainer: React.FC = ({ children }) => {
     return (
         <Container>
             <BreadCrumb>
-                <div>Hello</div>
+                <div>{childQuery.data && childQuery.data.Film.title}</div>
                 <Divider>|</Divider>
                 <div>Hello</div>
                 <Divider>|</Divider>
@@ -55,22 +61,24 @@ const ListContainer: React.FC = ({ children }) => {
             </BreadCrumb>
 
             <ListGroups>
-                <List loading={loading}>
-                    {data &&
-                        data.allFilms.map((film, index) => (
+                <List loading={masterQuery.loading}>
+                    {masterQuery.data &&
+                        masterQuery.data.allFilms.map((film, index) => (
                             <FilmItem
                                 key={`${film.title}_${index}`}
                                 film={film}
                                 selected={searchState.currentFilmId === film.id}
                                 clickAction={searchDispatch}
-                            />
+                            >
+                                <span>{film.title}</span>
+                            </FilmItem>
                         ))}
                 </List>
                 {searchState.currentFilmId && (
-                    <LoadingElement loading={querydata.loading}>
+                    <LoadingElement loading={childQuery.loading}>
                         <List>
-                            {querydata.data &&
-                                querydata.data.Film.species.map(
+                            {childQuery.data &&
+                                childQuery.data.Film.species.map(
                                     (species, index) => (
                                         <SpeciesItem
                                             species={species}
@@ -78,14 +86,14 @@ const ListContainer: React.FC = ({ children }) => {
                                             selected={false}
                                             clickAction={() => {}}
                                         >
-                                            {species.name}
+                                            <span>{species.name}</span>
                                         </SpeciesItem>
                                     )
                                 )}
                         </List>
                         <List>
-                            {querydata.data &&
-                                querydata.data.Film.planets.map(
+                            {childQuery.data &&
+                                childQuery.data.Film.planets.map(
                                     (planet, index) => (
                                         <SpeciesItem
                                             species={planet}
@@ -93,7 +101,7 @@ const ListContainer: React.FC = ({ children }) => {
                                             selected={false}
                                             clickAction={() => {}}
                                         >
-                                            {planet.name}
+                                            <span>{planet.name}</span>
                                         </SpeciesItem>
                                     )
                                 )}

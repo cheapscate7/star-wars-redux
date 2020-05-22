@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 
+/**
+ * button for adding either master or child list elements to the search results
+ */
 const AddOptionButton = styled.button`
     display: flex;
     justify-content: center;

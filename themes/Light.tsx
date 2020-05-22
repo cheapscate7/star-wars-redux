@@ -1,3 +1,7 @@
+/**
+ * LIGHT THEME
+ * tries to prioritise white and light colours as well as blue to thematically represent the light side
+ */
 const LightTheme: Theme = {
     colors: {
         foreground: 'black',
@@ -18,10 +22,6 @@ const LightTheme: Theme = {
         large: '3rem',
         huge: '5rem',
     },
-    shadows: [
-        'inset 0 0 0 1px #ddd, 0 0 10px 0 rgba(0,0,0,.1)',
-        '0px 0px 6px 0px rgba(0,0,0,0.75)',
-    ],
     fonts: [
         '"SW-Galaxy", -apple-system, sans-serif',
         '"Iceland", -apple-system, sans-serif',

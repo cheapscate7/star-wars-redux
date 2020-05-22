@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components';
 import React from 'react';
 import { rgba } from 'polished';
 
+/**
+ * A breadcrumb for displaying selected Film | Species | Planet
+ * this breadcrumb is filled with the highlight_1 colour
+ * @param children  pass headers containing the information in the breadcrumb and the placement of dividers eg <span>Film</span> | <span>Planet</span>
+ * @constructor
+ */
 const BreadCrumb: React.FC = ({ children }) => {
     return <BreadCrumbContainer>{children}</BreadCrumbContainer>;
 };

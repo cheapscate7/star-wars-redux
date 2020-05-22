@@ -1,12 +1,23 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import LoadingElement from '../LoadingElement';
 
 type ListProps = {
     loading?: boolean;
 };
 
+/**
+ * for displaying a collection of list nodes eg: <FilmItem>
+ * @param loading   type:boolean    are the list's children loading
+ * @param children
+ * @constructor
+ */
 const List: React.FC<ListProps> = ({ loading, children }) => {
-    return <Container>{loading ? 'loading' : children}</Container>;
+    return (
+        <Container>
+            <LoadingElement loading={loading}>{children}</LoadingElement>
+        </Container>
+    );
 };
 
 export default List;

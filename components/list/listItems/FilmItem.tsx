@@ -7,10 +7,23 @@ interface FilmItemProps extends IListItemProps {
     film: IFilm;
 }
 
-const FilmItem: React.FC<FilmItemProps> = ({ film, selected, clickAction }) => {
+/**
+ * renders an individual film's data in a <List> component
+ * @param film  type: IFilm     the film data to be rendered
+ * @param selected  type: boolean   triggers special css if film is selected
+ * @param clickAction   type: function  action when button is pressed
+ * @param children  type: DocumentNode
+ * @constructor
+ */
+const FilmItem: React.FC<FilmItemProps> = ({
+    film,
+    selected,
+    clickAction,
+    children,
+}) => {
     return (
         <Item className={selected && 'active'}>
-            {film.title}
+            {children}
             <AddOptionButton
                 onClick={() =>
                     clickAction(searchActions.setCurrentFilmId(film.id))

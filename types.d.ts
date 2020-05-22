@@ -1,23 +1,55 @@
+/**
+ * TYPE DECLARATIONS
+ * for types that should be available throughout the project
+ */
+
+/**
+ * ISWNode
+ * all returned data from swapi.graph.cool shares an id type
+ */
 declare interface ISWNode {
     id: string;
 }
 
+/**
+ * IPlanet
+ * data on planets
+ */
 declare interface IPlanet extends ISWNode {
     name: string;
 }
 
+/**
+ * ISpecies
+ * data on species
+ */
 declare interface ISpecies extends ISWNode {
     name: string;
 }
 
+/**
+ * IFilm
+ * data on each film
+ */
 declare interface IFilm extends ISWNode {
     title: string;
 }
 
+/**
+ * GraphQL query types
+ */
+/**
+ * IAll_films_data
+ * the master list that all other lists rely on contains the films of the franchise
+ */
 declare interface IAll_films_data {
     allFilms: IFilm[];
 }
 
+/**
+ * IFilmChildrenData
+ * lists of species and planets rely on a film
+ */
 declare interface IFilmChildrenData {
     Film: {
         title: string;
@@ -32,11 +64,23 @@ declare interface ICharactersQueryVariables {
     species_every?: ISWNode;
 }
 
+/**
+ * COMPONENT PROPS
+ * only props that relate to multiple components are found here
+ */
+
+/**
+ * IListItemProps
+ * eg: FilmItem, SpeciesItem
+ */
 declare interface IListItemProps {
     selected: boolean;
     clickAction: any;
 }
 
+/**
+ * THEME
+ */
 declare interface Theme {
     colors: {
         foreground: string;
@@ -59,6 +103,6 @@ declare interface Theme {
         large: string;
         huge: string;
     };
-    shadows: string[];
+    shadows?: string[];
     fonts: string[];
 }

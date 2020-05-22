@@ -1,8 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Title: React.FC = (props) => {
-    return <Container>{props.children}</Container>;
+/**
+ * Wrapper to create a fancy title using the "star wars" font
+ * @param children
+ * @constructor
+ */
+const Title: React.FC = ({ children }) => {
+    return <Container>{children}</Container>;
 };
 
 const Container = styled.div`
