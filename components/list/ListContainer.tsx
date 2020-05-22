@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
 import withSearch from '../../lib/withSearch';
+import SpeciesItem from './listItems/SpeciesItem';
 
 const ALL_FILMS = gql`
     query {
@@ -33,7 +34,7 @@ const FILM_CHILDREN = gql`
 `;
 
 const ListContainer: React.FC = ({ children }) => {
-    const { loading, error, data } = useQuery<IAll_films_data>(ALL_FILMS);
+    const { loading, data } = useQuery<IAll_films_data>(ALL_FILMS);
     const { searchState, searchDispatch } = withSearch();
     const querydata = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
         variables: {
@@ -70,11 +71,29 @@ const ListContainer: React.FC = ({ children }) => {
                             {querydata.data &&
                                 querydata.data.Film.species.map(
                                     (species, index) => (
-                                        <li
+                                        <SpeciesItem
+                                            species={species}
                                             key={`species_${index}_${species.name}`}
+                                            selected={false}
+                                            clickAction={() => {}}
                                         >
                                             {species.name}
-                                        </li>
+                                        </SpeciesItem>
+                                    )
+                                )}
+                        </List>
+                        <List loading={querydata.loading}>
+                            {querydata.data &&
+                                querydata.data.Film.planets.map(
+                                    (planet, index) => (
+                                        <SpeciesItem
+                                            species={planet}
+                                            key={`species_${index}_${planet.name}`}
+                                            selected={false}
+                                            clickAction={() => {}}
+                                        >
+                                            {planet.name}
+                                        </SpeciesItem>
                                     )
                                 )}
                         </List>

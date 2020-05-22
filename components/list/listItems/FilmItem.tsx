@@ -1,25 +1,23 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { searchActions } from '../../../lib/withSearch';
-import { math } from 'polished';
+import AddOptionButton from './AddOptionButton';
 
-type FilmItemProps = {
+interface FilmItemProps extends IListItemProps {
     film: IFilm;
-    selected: boolean;
-    clickAction: any;
-};
+}
 
 const FilmItem: React.FC<FilmItemProps> = ({ film, selected, clickAction }) => {
     return (
         <Item className={selected && 'active'}>
             {film.title}
-            <NextOptionButton
+            <AddOptionButton
                 onClick={() =>
                     clickAction(searchActions.setCurrentFilmId(film.id))
                 }
             >
                 <img alt={'next option'} src={'/arrow-right.svg'} />
-            </NextOptionButton>
+            </AddOptionButton>
         </Item>
     );
 };
@@ -35,6 +33,7 @@ const Item = styled.li`
     transition: 0.2s ease;
     ${({ theme }) => css`
         border: 1px solid ${theme.colors.foreground};
+        font-size: ${theme.fontSizes.small};
         &.active {
             border-right: 0.25em double ${theme.colors.foreground};
         }
@@ -79,6 +78,7 @@ const Item = styled.li`
             border: 1px solid ${theme.colors.highlight_1};
             color: ${theme.colors.highlight_1};
             font-weight: ${theme.fontWeights.bold};
+            padding: 1.2em 2.2em;
             &::before {
                 border: 1px solid ${theme.colors.highlight_1};
                 border-left: 1px solid ${theme.colors.background};
@@ -93,26 +93,20 @@ const Item = styled.li`
 
     &:first-child {
         margin-bottom: 0.5em;
+        &.active {
+          margin-left: 1em;
+        }
     }
     &:last-child {
         margin-top: 0.5em;
+        &.active {
+          margin-left: 1em;
+        }
     }
     &:not(:first-child):not(:last-child) {
-        margin: 0.25em auto;
-    }
-   
-`;
-
-const NextOptionButton = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.2em;
-    background-color: white;
-    border: 0;
-    cursor: pointer;
-    img {
-        width: 16px;
-        height: 16px;
+        margin: 0.5em auto;
+        &.active {
+          margin-left: 1em;
+        }
     }
 `;

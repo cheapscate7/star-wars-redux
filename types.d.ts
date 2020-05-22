@@ -22,7 +22,7 @@ declare interface IFilmChildrenData {
     Film: {
         title: string;
         species: ISpecies[];
-        planet: IPlanet[];
+        planets: IPlanet[];
     };
 }
 
@@ -30,6 +30,11 @@ declare interface ICharactersQueryVariables {
     homeworld?: ISWNode;
     films_every?: ISWNode;
     species_every?: ISWNode;
+}
+
+declare interface IListItemProps {
+    selected: boolean;
+    clickAction: any;
 }
 
 declare interface Theme {

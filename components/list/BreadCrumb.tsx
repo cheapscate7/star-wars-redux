@@ -17,7 +17,7 @@ const BreadCrumbContainer = styled.div`
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
         color: ${theme.colors.background};
-        font-family: ${theme.fonts[1] || theme.fonts[0]};
+        font-family: ${theme.fonts[2] || theme.fonts[0]};
     `};
     > *:first-child {
         margin-right: 0.5em;
