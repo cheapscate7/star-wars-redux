@@ -1,15 +1,17 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { searchActions } from '../../../lib/withSearch';
+import { math } from 'polished';
 
 type FilmItemProps = {
     film: IFilm;
+    selected: boolean;
     clickAction: any;
 };
 
-const FilmItem: React.FC<FilmItemProps> = ({ film, clickAction }) => {
+const FilmItem: React.FC<FilmItemProps> = ({ film, selected, clickAction }) => {
     return (
-        <Item>
+        <Item className={selected && 'active'}>
             {film.title}
             <NextOptionButton
                 onClick={() =>
@@ -33,6 +35,9 @@ const Item = styled.li`
     transition: 0.2s ease;
     ${({ theme }) => css`
         border: 1px solid ${theme.colors.foreground};
+        &.active {
+            border-right: 0.25em double ${theme.colors.foreground};
+        }
     `};
 
     &::before {
@@ -66,6 +71,7 @@ const Item = styled.li`
         ${({ theme }) => css`
             border-right: 1em solid ${theme.colors.foreground};
         `};
+        }
     }
 
     &:hover {
@@ -94,6 +100,7 @@ const Item = styled.li`
     &:not(:first-child):not(:last-child) {
         margin: 0.25em auto;
     }
+   
 `;
 
 const NextOptionButton = styled.button`

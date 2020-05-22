@@ -13,8 +13,10 @@ export default List;
 
 const Container = styled.ul`
     list-style-type: none;
-    padding: 0;
+    padding: 1em;
+    transition: width 0.2s ease;
     ${({ theme }) => css`
         font-family: ${theme.fonts[1] || theme.fonts[0]};
+        border-bottom: 1px solid ${theme.colors.highlight_1_contrast};
     `};
 `;

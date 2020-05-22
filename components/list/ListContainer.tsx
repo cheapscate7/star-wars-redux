@@ -59,6 +59,7 @@ const ListContainer: React.FC = ({ children }) => {
                             <FilmItem
                                 key={`${film.title}_${index}`}
                                 film={film}
+                                selected={searchState.currentFilmId === film.id}
                                 clickAction={searchDispatch}
                             />
                         ))}
