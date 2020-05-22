@@ -1,17 +1,33 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { searchActions } from '../../../lib/withSearch';
 
 type FilmItemProps = {
     film: IFilm;
+    clickAction: any;
 };
 
-const FilmItem: React.FC<FilmItemProps> = ({ film }) => {
-    return <Item>{film.title}</Item>;
+const FilmItem: React.FC<FilmItemProps> = ({ film, clickAction }) => {
+    return (
+        <Item>
+            {film.title}
+            <NextOptionButton
+                onClick={() =>
+                    clickAction(searchActions.setCurrentFilmId(film.id))
+                }
+            >
+                <img alt={'next option'} src={'/arrow-right.svg'} />
+            </NextOptionButton>
+        </Item>
+    );
 };
 
 export default FilmItem;
 
 const Item = styled.li`
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     position: relative;
     padding: 1em 2em;
     cursor: pointer;
@@ -78,5 +94,18 @@ const Item = styled.li`
     }
     &:not(:first-child):not(:last-child) {
         margin: 0.25em auto;
+    }
+`;
+
+const NextOptionButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2em;
+    background-color: white;
+    border: 0;
+    img {
+        width: 16px;
+        height: 16px;
     }
 `;

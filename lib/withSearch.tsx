@@ -26,13 +26,14 @@ enum Actions {
     StateCleared,
 }
 
-const searchActions = {
+export const searchActions = {
     reset() {
         return {
             type: Actions.StateCleared,
         } as const;
     },
     setCurrentFilmId(id: string) {
+        console.log(id);
         return {
             payload: id,
             type: Actions.CurrentFilmIdSet,
@@ -73,8 +74,8 @@ function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
     return state;
 }
 
-const withSearch = (init: () => IWithSearchState = null) => {
-    const [state, dispatch] = useReducer(reducer, initialState, init);
+const withSearch = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return {
         searchState: state,
