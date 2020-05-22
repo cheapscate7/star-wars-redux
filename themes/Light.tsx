@@ -13,7 +13,7 @@ const LightTheme: Theme = {
     },
     fontSizes: {
         tiny: '0.5rem',
-        small: '1rem',
+        small: '1.2rem',
         medium: '2rem',
         large: '3rem',
         huge: '5rem',
@@ -24,6 +24,7 @@ const LightTheme: Theme = {
     ],
     fonts: [
         '"SW-Galaxy", -apple-system, sans-serif',
+        '"Iceland", -apple-system, sans-serif',
         '"Montserrat", -apple-system, sans-serif',
     ],
 };

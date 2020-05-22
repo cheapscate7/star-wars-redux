@@ -11,6 +11,15 @@ const GlobalStyle = createGlobalStyle`
         src: url('/fonts/SW-Distant-Galaxy.ttf');
     }
     /**
+      Iceland
+      this is another "space-y" font that looks like some of the alien writing in the movies
+     */
+    @font-face {
+        font-family: 'Iceland';
+        font-display: swap;
+        src: url('/fonts/Iceland-Regular.ttf');
+    }
+    /**
       Montserrat
      */
     @font-face {
@@ -23,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
         border: 0;
         margin: 0;
         ${({ theme }) => css`
-            background-color: 1px solid ${theme.colors.background};
+            background-color: ${theme.colors.background};
         `};
     }
     
