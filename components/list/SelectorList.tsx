@@ -12,7 +12,7 @@ type ListProps = {
  * @param children
  * @constructor
  */
-const List: React.FC<ListProps> = ({ loading, children }) => {
+const SelectorList: React.FC<ListProps> = ({ loading, children }) => {
     return (
         <Container>
             <LoadingElement loading={loading}>{children}</LoadingElement>
@@ -20,7 +20,7 @@ const List: React.FC<ListProps> = ({ loading, children }) => {
     );
 };
 
-export default List;
+export default SelectorList;
 
 const Container = styled.ul`
     list-style-type: none;

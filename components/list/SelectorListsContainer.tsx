@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import BreadCrumb from './BreadCrumb';
-import List from './List';
+import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
@@ -35,12 +35,12 @@ const FILM_CHILDREN = gql`
 `;
 
 /**
- * A grid for placing <List> items in based on CSS grids
+ * A grid for placing <SelectorList> items in based on CSS grids
  * one List acts as a master, selecting a value from the master list causes all child lists to be render
  * also has a breadcrumb
  * @constructor
  */
-const ListContainer: React.FC = () => {
+const SelectorListsContainer: React.FC = () => {
     const masterQuery = useQuery<IAll_films_data>(ALL_FILMS);
     const { searchState, searchDispatch } = withSearch();
     const childQuery = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
@@ -61,7 +61,7 @@ const ListContainer: React.FC = () => {
             </BreadCrumb>
 
             <ListGroups>
-                <List loading={masterQuery.loading}>
+                <SelectorList loading={masterQuery.loading}>
                     {masterQuery.data &&
                         masterQuery.data.allFilms.map((film, index) => (
                             <FilmItem
@@ -73,10 +73,10 @@ const ListContainer: React.FC = () => {
                                 <span>{film.title}</span>
                             </FilmItem>
                         ))}
-                </List>
+                </SelectorList>
                 {searchState.currentFilmId && (
                     <LoadingElement loading={childQuery.loading}>
-                        <List>
+                        <SelectorList>
                             {childQuery.data &&
                                 childQuery.data.Film.species.map(
                                     (species, index) => (
@@ -90,8 +90,8 @@ const ListContainer: React.FC = () => {
                                         </SpeciesItem>
                                     )
                                 )}
-                        </List>
-                        <List>
+                        </SelectorList>
+                        <SelectorList>
                             {childQuery.data &&
                                 childQuery.data.Film.planets.map(
                                     (planet, index) => (
@@ -105,7 +105,7 @@ const ListContainer: React.FC = () => {
                                         </SpeciesItem>
                                     )
                                 )}
-                        </List>
+                        </SelectorList>
                     </LoadingElement>
                 )}
             </ListGroups>
@@ -113,7 +113,7 @@ const ListContainer: React.FC = () => {
     );
 };
 
-export default ListContainer;
+export default SelectorListsContainer;
 
 const Container = styled.div`
     display: flex;
