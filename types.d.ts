@@ -35,6 +35,10 @@ declare interface IFilm extends ISWNode {
     title: string;
 }
 
+declare interface ICharacter {
+    name: string;
+}
+
 /**
  * GraphQL query types
  */
@@ -59,9 +63,11 @@ declare interface IFilmChildrenData {
 }
 
 declare interface ICharactersQueryVariables {
-    homeworld?: ISWNode;
-    films_every?: ISWNode;
-    species_every?: ISWNode;
+    filter: {
+        homeworld?: { id: string | undefined };
+        films_every?: { id: string | undefined };
+        species_every?: { id: string | undefined };
+    };
 }
 
 /**
@@ -76,6 +82,10 @@ declare interface ICharactersQueryVariables {
 declare interface IListItemProps {
     selected: boolean;
     clickAction: any;
+}
+
+declare interface IListProps {
+    loading?: boolean;
 }
 
 /**
