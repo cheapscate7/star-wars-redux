@@ -4,6 +4,8 @@ import ListGroups from '../ListsShared/ListGroups';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import CharacterList from './CharacterList';
+import withSearchContext from '../../lib/withSeachContext';
+import SearchContext from '../../lib/withSeachContext';
 
 const GET_CHARACTERS = gql`
     query($filter: PersonFilter) {
@@ -13,35 +15,44 @@ const GET_CHARACTERS = gql`
     }
 `;
 
-interface ICharacterListContainer {
-    homeworldId?: string | undefined;
-    filmId?: string | undefined;
-    speciesId?: string | undefined;
+interface I {
+    allPersons: { name: string }[];
 }
 
-const CharacterListContainer: React.FC<ICharacterListContainer> = ({
-    homeworldId,
-    filmId,
-    speciesId,
-}) => {
-    const characterQuery = useQuery<
-        IFilmChildrenData,
-        ICharactersQueryVariables
-    >(GET_CHARACTERS, {
-        variables: {
-            filter: {
-                homeworld: { id: homeworldId || null },
-                films_every: { id: filmId || null },
-                species_every: { id: speciesId || null },
+const CharacterListContainer: React.FC = () => {
+    // @ts-ignore
+    const { searchState } = React.useContext(SearchContext);
+    console.log(searchState.currentFilmId);
+    const characterQuery = useQuery<I, ICharactersQueryVariables>(
+        GET_CHARACTERS,
+        {
+            variables: {
+                filter: {
+                    homeworld: {
+                        id: searchState.combinedQueryParams.planetId || null,
+                    },
+                    films_every: {
+                        id: searchState.combinedQueryParams.filmId || null,
+                    },
+                    species_every: {
+                        id: searchState.combinedQueryParams.speciesId || null,
+                    },
+                },
             },
-        },
-        skip: true,
-    });
-
+            skip: !searchState.currentFilmId,
+        }
+    );
+    console.log(characterQuery.data);
     return (
         <Container>
             <ListGroups>
-                <CharacterList></CharacterList>
+                {searchState.currentFilmId && (
+                    <CharacterList loading={characterQuery.loading}>
+                        {characterQuery.data.allPersons.map((person, index) => (
+                            <p key={index}>{person.name}</p>
+                        ))}
+                    </CharacterList>
+                )}
             </ListGroups>
         </Container>
     );

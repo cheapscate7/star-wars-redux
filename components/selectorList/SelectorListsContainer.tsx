@@ -10,6 +10,7 @@ import SpeciesItem from './listItems/SpeciesItem';
 import LoadingElement from '../LoadingElement';
 import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
+import SearchContext from '../..//lib/withSeachContext';
 
 const ALL_FILMS = gql`
     query {
@@ -44,14 +45,14 @@ const FILM_CHILDREN = gql`
  */
 const SelectorListsContainer: React.FC = ({ children }) => {
     const masterQuery = useQuery<IAll_films_data>(ALL_FILMS);
-    const { searchState, searchDispatch } = withSearch();
+    //@ts-ignore
+    const { searchState, searchDispatch } = React.useContext(SearchContext);
     const childQuery = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
         variables: {
-            id: searchState.currentFilmId,
+            id: searchState.currentFilmId || null,
         },
         skip: !searchState.currentFilmId,
     });
-
     return (
         <>
             <Container>
@@ -115,7 +116,6 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                     )}
                 </ListGroups>
             </Container>
-            {children}
         </>
     );
 };
