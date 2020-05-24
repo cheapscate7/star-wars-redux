@@ -1,28 +1,36 @@
 import { useReducer } from 'react';
 
 interface ICombinedQueryParams {
-    filmId: string | null;
-    speciesId: string | null;
-    planetId: string | null;
+    film: IFilm;
+    species: ISpecies;
+    planet: IPlanet;
 }
 
 interface IWithSearchState {
-    currentFilmId: string | null;
     combinedQueryParams: ICombinedQueryParams;
 }
 
 const initialState: IWithSearchState = {
-    currentFilmId: null,
     combinedQueryParams: {
-        filmId: null,
-        speciesId: null,
-        planetId: null,
+        film: {
+            id: '',
+            title: '',
+        },
+        species: {
+            id: '',
+            name: '',
+        },
+        planet: {
+            id: '',
+            name: '',
+        },
     },
 };
 
 enum Actions {
-    CurrentFilmIdSet,
-    CombinedQueryParamSet,
+    FilmObjectSet,
+    SpeciesObjectSet,
+    PlanetObjectSet,
     StateCleared,
 }
 
@@ -32,20 +40,22 @@ export const searchActions = {
             type: Actions.StateCleared,
         } as const;
     },
-    setCurrentFilmId(id: string) {
-        console.log(id);
+    setFilmObject(obj: IFilm) {
         return {
-            payload: id,
-            type: Actions.CurrentFilmIdSet,
+            payload: obj,
+            type: Actions.FilmObjectSet,
         } as const;
     },
-    setCombinedQueryParam(key: string, value: string) {
+    setSpeciesObject(obj: ISpecies) {
         return {
-            payload: {
-                key,
-                value,
-            },
-            type: Actions.CurrentFilmIdSet,
+            payload: obj,
+            type: Actions.SpeciesObjectSet,
+        } as const;
+    },
+    setPlanetObject(obj: IPlanet) {
+        return {
+            payload: obj,
+            type: Actions.PlanetObjectSet,
         } as const;
     },
 };
@@ -57,18 +67,15 @@ function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
     switch (action.type) {
         case Actions.StateCleared:
             return initialState;
-        case Actions.CurrentFilmIdSet:
-            return {
-                ...state,
-                currentFilmId: action.payload,
-            };
-        case Actions.CombinedQueryParamSet:
-            let { combinedQueryParams } = state;
-            combinedQueryParams[action.payload.key] = action.payload.value;
-            return {
-                ...state,
-                combinedQueryParams,
-            };
+        case Actions.FilmObjectSet:
+            state.combinedQueryParams.film = action.payload;
+            return state;
+        case Actions.SpeciesObjectSet:
+            state.combinedQueryParams.species = action.payload;
+            return state;
+        case Actions.PlanetObjectSet:
+            state.combinedQueryParams.planet = action.payload;
+            return state;
     }
 
     return state;

@@ -53,15 +53,24 @@ const SelectorListsContainer: React.FC = ({ children }) => {
         },
         skip: !searchState.currentFilmId,
     });
+
     return (
         <>
             <Container>
                 <BreadCrumb>
-                    <div>{childQuery.data && childQuery.data.Film.title}</div>
-                    <Divider>|</Divider>
-                    <div>Hello</div>
-                    <Divider>|</Divider>
-                    <div>Hello</div>
+                    <div>{searchState.combinedQueryParams.film.title}</div>
+                    {searchState.combinedQueryParams.film.title &&
+                        (searchState.combinedQueryParams.species.name ||
+                            searchState.combinedQueryParams.planet.name) && (
+                            <Divider>|</Divider>
+                        )}
+                    <div>{searchState.combinedQueryParams.species.name}</div>
+                    {searchState.combinedQueryParams.film.title &&
+                        searchState.combinedQueryParams.species.name &&
+                        searchState.combinedQueryParams.planet.name && (
+                            <Divider>|</Divider>
+                        )}
+                    <div>{searchState.combinedQueryParams.planet.name}</div>
                 </BreadCrumb>
 
                 <ListGroups>

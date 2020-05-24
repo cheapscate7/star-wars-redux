@@ -20,6 +20,7 @@ const BreadCrumbContainer = styled.div`
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     padding: 1em 1.5em;
+    min-height: 1em;
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
         color: ${theme.colors.background};
