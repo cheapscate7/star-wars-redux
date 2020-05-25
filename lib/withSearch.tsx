@@ -64,7 +64,7 @@ function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
         case Actions.FilmObjectSet:
             return {
                 combinedQueryParams: {
-                    ...state.combinedQueryParams,
+                    ...initialState.combinedQueryParams,
                     film: action.payload,
                 },
             };
