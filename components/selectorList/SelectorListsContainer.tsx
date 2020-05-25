@@ -46,7 +46,6 @@ const FILM_CHILDREN = gql`
  */
 const SelectorListsContainer: React.FC = () => {
     const masterQuery = useQuery<IAllFilmsQuery>(ALL_FILMS);
-    //@ts-ignore
     const { searchState, searchDispatch } = React.useContext(SearchContext);
     const { combinedQueryParams } = searchState;
     const childQuery = useQuery<
@@ -72,7 +71,7 @@ const SelectorListsContainer: React.FC = () => {
             />
 
             <ListGroups>
-                <SelectorList loading={masterQuery.loading}>
+                <SelectorList loading={masterQuery.loading} title={'// Film'}>
                     {masterQuery.data &&
                         masterQuery.data.allFilms.map((film, index) => (
                             <FilmItem
@@ -89,7 +88,7 @@ const SelectorListsContainer: React.FC = () => {
                 </SelectorList>
                 {showChildren && (
                     <LoadingElement loading={childQuery.loading}>
-                        <SelectorList>
+                        <SelectorList title={'// Species'}>
                             {childQuery.data &&
                                 childQuery.data.Film.species.map(
                                     (species, index) => (
@@ -107,7 +106,7 @@ const SelectorListsContainer: React.FC = () => {
                                     )
                                 )}
                         </SelectorList>
-                        <SelectorList>
+                        <SelectorList title={'// Planets'}>
                             {childQuery.data &&
                                 childQuery.data.Film.planets.map(
                                     (planet, index) => (

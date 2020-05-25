@@ -28,8 +28,4 @@ const Home: NextPage<HomeProps> = () => {
     );
 };
 
-Home.defaultProps = (ctx) => {
-    console.log(ctx);
-};
-
 export default withApollo({ ssr: true })(Home);
