@@ -66,7 +66,7 @@ const CharacterListContainer: React.FC = () => {
                                 selected={false}
                                 clickAction={() => {}}
                             >
-                                no results
+                                No Results
                             </CharacterItem>
                         )}
                     </CharacterList>

@@ -1,6 +1,9 @@
 import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+/**
+FONTS
+ */
     /**
       Star wars Distant Galaxy
       this is the fancy Star wars font
@@ -27,6 +30,17 @@ const GlobalStyle = createGlobalStyle`
         font-display: swap;
         src: url('/fonts/Montserrat-Regular.ttf');
     }
+/**
+STYLES
+ */
+    :root {
+      font-size: 12pt;
+      @media (max-width: 425px) {
+          font-size: 11pt;
+        }
+    
+      
+    }
     
     body {
         border: 0;
@@ -36,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
         `};
     }
     
-    h1{
+    h1 {
       margin: 0;
       ${({ theme }) => css`
           font-size: ${theme.fontSizes.large};

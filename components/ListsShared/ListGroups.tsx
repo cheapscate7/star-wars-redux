@@ -7,6 +7,10 @@ const ListGroups = styled.div`
     ${({ theme }) => css`
         border-bottom: 1px solid ${theme.colors.foreground};
     `};
+
+    @media (max-width: 425px) {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
 `;
 
 export default ListGroups;

@@ -42,6 +42,7 @@ const Item = styled.div`
         border: 1px solid ${theme.colors.foreground};
     `};
     > div {
+        width: 100%;
         ${({ theme }) => css`
             border-bottom: 1px solid ${theme.colors.highlight_1_contrast};
             font-family: ${theme.fonts[2] || theme.fonts[0]};
