@@ -1,16 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import React from 'react';
 import LoadingElement from '../LoadingElement';
 
-const CharacterList: React.FC<IListProps> = ({ loading, children }) => {
+const CharacterList: React.FC<IListProps> = ({ title, loading, children }) => {
     return (
-        <List>
-            <LoadingElement loading={loading}>{children}</LoadingElement>
-        </List>
+        <Container>
+            {title && <h2>{title}</h2>}
+            <List>
+                <LoadingElement loading={loading}>{children}</LoadingElement>
+            </List>
+        </Container>
     );
 };
 
 export default CharacterList;
+
+const Container = styled.section`
+    padding: 0 1em;
+    ${({ theme }) => css`
+        font-family: ${theme.fonts[2] || theme.fonts[0]};
+    `};
+`;
 
 const List = styled.div`
     display: grid;

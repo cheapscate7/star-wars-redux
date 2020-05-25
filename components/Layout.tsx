@@ -1,27 +1,39 @@
-import React from "react";
-import Title from "./Title";
-import styled, { css } from 'styled-components';
+import React from 'react';
+import Title from './Title';
+import styled from 'styled-components';
+import Head from 'next/head';
 
-const Layout: React.FC = (props) => {
-  return (
-    <>
-      <PageHeader>
-        <Title><h1>STARDB</h1></Title>
-      </PageHeader>
-      <PageContent>{props.children}</PageContent>
-    </>
-  );
+interface ILayoutProps {
+    title: string;
+    description: string;
+}
+
+const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
+    return (
+        <>
+            <Head>
+                <title>Star Wars Database - {title}</title>
+                <meta name="Description" content={description} />
+            </Head>
+            <PageHeader>
+                <Title>
+                    <h1>STARDB</h1>
+                </Title>
+            </PageHeader>
+            <PageContent>{children}</PageContent>
+        </>
+    );
 };
 
 export default Layout;
 
 const PageHeader = styled.nav`
-  color: white;
-  padding: 2em 1em;
-  border-bottom: 1px solid #777777;
+    color: white;
+    padding: 2em 1em;
+    border-bottom: 1px solid #777777;
 `;
 
 const PageContent = styled.main`
-  max-width: 73rem;
-  margin: auto;
+    max-width: 73rem;
+    margin: auto;
 `;

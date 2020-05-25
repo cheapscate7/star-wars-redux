@@ -10,7 +10,6 @@ const CharacterItem: React.FC<CharacterItemProps> = ({
     selected,
     children,
 }) => {
-    console.log(character);
     return (
         <Item className={selected && 'active'}>
             {children ? (

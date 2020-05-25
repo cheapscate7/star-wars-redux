@@ -50,7 +50,7 @@ const CharacterListContainer: React.FC = () => {
         <Container>
             <ListGroups>
                 {searchState.combinedQueryParams.film.id && (
-                    <CharacterList loading={loading}>
+                    <CharacterList loading={loading} title={'// Characters'}>
                         {data && data.allPersons.length > 0 ? (
                             data.allPersons.map((person, index) => (
                                 <CharacterItem

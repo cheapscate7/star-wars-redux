@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
-import LightTheme from "../themes/Light";
-import GlobalStyle from "../components/global";
+import LightTheme from '../themes/Light';
+import GlobalStyle from '../components/global';
 import { ThemeProvider } from 'styled-components';
 
 const app = ({ Component, pageProps }) => {
@@ -13,7 +13,7 @@ const app = ({ Component, pageProps }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <link rel="shortcut icon" href="/favicon.ico" />
+                <link rel="shortcut icon" href="/icon-16.webp" />
                 <meta name="theme-color" content="#ffffff" />
             </Head>
             <ThemeProvider theme={LightTheme}>

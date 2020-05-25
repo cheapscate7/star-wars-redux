@@ -2,14 +2,10 @@ import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
 
 const Item = styled.li`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     padding: 0.5em;
     transition: 0.2s ease;
     ${({ theme }) => css`
         border: 1px solid ${rgba(theme.colors.highlight_1, 0.4)};
-        color: ${theme.colors.highlight_1};
 
         &.active {
             border-right: 0.25em double ${theme.colors.foreground};
@@ -70,6 +66,19 @@ const Item = styled.li`
         background-size: 10px 10px;
         background-color: ${rgba(theme.colors.highlight_1, 0.02)};
         box-shadow: 0 0 7px ${rgba(theme.colors.highlight_1, 0.2)};
+        button {
+            color: ${theme.colors.highlight_1};
+            font-family: ${theme.fonts[1] || theme.fonts[0]};
+            font-size: ${theme.fontSizes.small};
+            width: 100%;
+            cursor: pointer;
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
     `};
 
     &:hover {

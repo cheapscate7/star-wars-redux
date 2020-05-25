@@ -8,22 +8,31 @@ import LoadingElement from '../LoadingElement';
  * @param children
  * @constructor
  */
-const SelectorList: React.FC<IListProps> = ({ loading, children }) => {
+const SelectorList: React.FC<IListProps> = ({ title, loading, children }) => {
     return (
         <Container>
-            <LoadingElement loading={loading}>{children}</LoadingElement>
+            {title && <h2>{title}</h2>}
+            <LoadingElement loading={loading}>
+                <List>{children}</List>
+            </LoadingElement>
         </Container>
     );
 };
 
 export default SelectorList;
 
-const Container = styled.ul`
+const Container = styled.section`
+    padding: 0 1em;
+    ${({ theme }) => css`
+        font-family: ${theme.fonts[2] || theme.fonts[0]};
+    `};
+`;
+
+const List = styled.ul`
     list-style-type: none;
-    padding: 1em;
+    padding-left: 0;
     transition: width 1s ease;
     ${({ theme }) => css`
         font-family: ${theme.fonts[1] || theme.fonts[0]};
-        border-bottom: 1px solid ${theme.colors.foreground};
     `};
 `;

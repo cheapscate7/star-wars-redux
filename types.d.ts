@@ -102,6 +102,7 @@ declare interface IListItemProps {
 }
 
 declare interface IListProps {
+    title?: string;
     loading?: boolean;
 }
 
