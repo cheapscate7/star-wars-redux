@@ -14,7 +14,7 @@ export default CharacterList;
 
 const List = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    column-gap: 0.5em;
     padding: 1em 2em;
 `;

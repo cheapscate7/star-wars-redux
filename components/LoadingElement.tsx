@@ -16,7 +16,7 @@ const LoadingElement: React.FC<ILoadingElementProps> = ({
     children,
 }) => {
     if (loading) {
-        return <Loading>Loading...</Loading>;
+        return <Loading />;
     } else {
         return <>{children}</>;
     }

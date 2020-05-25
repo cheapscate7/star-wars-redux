@@ -15,7 +15,7 @@ import PlanetItem from './listItems/childItems/PlanetItem';
 import removeUndefined from '../../lib/helpers/arrays';
 
 const ALL_FILMS = gql`
-    query {
+    query getAllFilms {
         allFilms {
             id
             title
@@ -24,7 +24,7 @@ const ALL_FILMS = gql`
 `;
 
 const FILM_CHILDREN = gql`
-    query($id: ID) {
+    query getSpeciesAndPlanetsFromFilm($id: ID) {
         Film(id: $id) {
             species {
                 id

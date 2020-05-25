@@ -8,7 +8,7 @@ import SearchContext from '../../lib/withSeachContext';
 import CharacterItem from './listItems/CharacterItem';
 
 const GET_CHARACTERS = gql`
-    query($filter: PersonFilter) {
+    query getCharacters($filter: PersonFilter) {
         allPersons(filter: $filter) {
             name
             species {
@@ -26,8 +26,7 @@ const GET_CHARACTERS = gql`
 
 const CharacterListContainer: React.FC = () => {
     const { searchState } = React.useContext(SearchContext);
-    console.log('Search state', searchState);
-    const { loading, error, data } = useQuery<
+    const { loading, data } = useQuery<
         IGetCharactersQuery,
         IGetCharactersQueryVariables
     >(GET_CHARACTERS, {
@@ -36,7 +35,7 @@ const CharacterListContainer: React.FC = () => {
                 homeworld: {
                     id: searchState.combinedQueryParams.planet.id || null,
                 },
-                films_every: {
+                films_some: {
                     id: searchState.combinedQueryParams.film.id || null,
                 },
                 species_every: {

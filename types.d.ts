@@ -82,7 +82,7 @@ declare interface IFilmChildrenQueryVariables {
 declare interface IGetCharactersQueryVariables {
     filter: {
         homeworld?: { id: string | null };
-        films_every?: { id: string | null };
+        films_some?: { id: string | null };
         species_every?: { id: string | null };
     };
 }
