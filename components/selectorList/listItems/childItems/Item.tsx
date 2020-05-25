@@ -1,36 +1,5 @@
-import styled, { css } from 'styled-components';
-import AddOptionButton from './AddOptionButton';
 import { rgba } from 'polished';
-
-interface SpeciesItemProps extends IListItemProps {
-    species: ISpecies;
-}
-
-/**
- * renders an individual Species' data in a <List> component
- * @param species  type: ISpecies     the species data to be rendered
- * @param selected  type: boolean   triggers special css if film is selected
- * @param clickAction   type: function  action when button is pressed
- * @param children  type: DocumentNode
- * @constructor
- */
-const SpeciesItem: React.FC<SpeciesItemProps> = ({
-    species,
-    clickAction,
-    selected,
-    children,
-}) => {
-    return (
-        <Item>
-            <AddOptionButton onClick={() => {}}>
-                <img alt={'add'} src={'/plus-sign.svg'} />
-            </AddOptionButton>
-            {children}
-        </Item>
-    );
-};
-
-export default SpeciesItem;
+import styled, { css } from 'styled-components';
 
 const Item = styled.li`
     display: flex;
@@ -44,6 +13,7 @@ const Item = styled.li`
 
         &.active {
             border-right: 0.25em double ${theme.colors.foreground};
+            border-left: 0.25em double ${theme.colors.foreground};
         }
          {
             /*This gives the box the bold corners*/
@@ -117,8 +87,4 @@ const Item = styled.li`
     }
 `;
 
-const AddIcon = styled.object`
-    path {
-        fill: green;
-    }
-`;
+export default Item;

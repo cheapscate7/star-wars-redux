@@ -2,17 +2,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import LoadingElement from '../LoadingElement';
 
-type ListProps = {
-    loading?: boolean;
-};
-
 /**
  * for displaying a collection of list nodes eg: <FilmItem>
  * @param loading   type:boolean    are the list's children loading
  * @param children
  * @constructor
  */
-const List: React.FC<ListProps> = ({ loading, children }) => {
+const SelectorList: React.FC<IListProps> = ({ loading, children }) => {
     return (
         <Container>
             <LoadingElement loading={loading}>{children}</LoadingElement>
@@ -20,7 +16,7 @@ const List: React.FC<ListProps> = ({ loading, children }) => {
     );
 };
 
-export default List;
+export default SelectorList;
 
 const Container = styled.ul`
     list-style-type: none;
@@ -28,6 +24,6 @@ const Container = styled.ul`
     transition: width 1s ease;
     ${({ theme }) => css`
         font-family: ${theme.fonts[1] || theme.fonts[0]};
-        border-bottom: 1px solid ${theme.colors.highlight_1_contrast};
+        border-bottom: 1px solid ${theme.colors.foreground};
     `};
 `;

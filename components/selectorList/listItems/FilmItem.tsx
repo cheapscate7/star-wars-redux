@@ -25,9 +25,7 @@ const FilmItem: React.FC<FilmItemProps> = ({
         <Item className={selected && 'active'}>
             {children}
             <AddOptionButton
-                onClick={() =>
-                    clickAction(searchActions.setCurrentFilmId(film.id))
-                }
+                onClick={() => clickAction(searchActions.setFilmObject(film))}
             >
                 <img alt={'next option'} src={'/arrow-right.svg'} />
             </AddOptionButton>

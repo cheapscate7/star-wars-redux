@@ -36,32 +36,55 @@ declare interface IFilm extends ISWNode {
 }
 
 /**
+ * ICharacter
+ * a particular character
+ */
+declare interface ICharacter {
+    name: string;
+    species: ISpecies;
+    homeworld: IPlanet;
+    birthYear: string;
+}
+
+/**
  * GraphQL query types
  */
 /**
- * IAll_films_data
+ * IAllFilmsQuery
  * the master list that all other lists rely on contains the films of the franchise
  */
-declare interface IAll_films_data {
+declare interface IAllFilmsQuery {
     allFilms: IFilm[];
 }
 
 /**
- * IFilmChildrenData
+ * IGetCharactersQuery
+ */
+declare interface IGetCharactersQuery {
+    allPersons: ICharacter[];
+}
+
+/**
+ * IFilmChildrenQuery
  * lists of species and planets rely on a film
  */
-declare interface IFilmChildrenData {
+declare interface IFilmChildrenQuery {
     Film: {
-        title: string;
         species: ISpecies[];
         planets: IPlanet[];
     };
 }
 
-declare interface ICharactersQueryVariables {
-    homeworld?: ISWNode;
-    films_every?: ISWNode;
-    species_every?: ISWNode;
+declare interface IFilmChildrenQueryVariables {
+    id: string | null;
+}
+
+declare interface IGetCharactersQueryVariables {
+    filter: {
+        homeworld?: { id: string | null };
+        films_some?: { id: string | null };
+        species_every?: { id: string | null };
+    };
 }
 
 /**
@@ -75,7 +98,22 @@ declare interface ICharactersQueryVariables {
  */
 declare interface IListItemProps {
     selected: boolean;
-    clickAction: any;
+    clickAction?: Function;
+}
+
+declare interface IListProps {
+    loading?: boolean;
+}
+
+/**
+ * States
+ */
+
+/**
+ * withSearch
+ */
+declare interface IWithSearchState {
+    combinedQueryParams: ICombinedQueryParams;
 }
 
 /**
@@ -105,4 +143,5 @@ declare interface Theme {
     };
     shadows?: string[];
     fonts: string[];
+    iconDecor: string;
 }

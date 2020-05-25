@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 
 interface ILoadingElementProps {
     loading: boolean;
@@ -15,10 +16,22 @@ const LoadingElement: React.FC<ILoadingElementProps> = ({
     children,
 }) => {
     if (loading) {
-        return <span>Loading...</span>;
+        return <Loading />;
     } else {
         return <>{children}</>;
     }
 };
 
 export default LoadingElement;
+
+const Loading = styled.div`
+    ${({ theme }) => css`
+        background-image: url(${theme.iconDecor});
+    `};
+    background-position: center;
+    background-repeat: no-repeat, repeat;
+    background-size: contain;
+    width: 5em;
+    height: 5em;
+    margin: auto;
+`;

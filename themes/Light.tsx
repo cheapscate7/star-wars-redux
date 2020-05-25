@@ -27,6 +27,7 @@ const LightTheme: Theme = {
         '"Iceland", -apple-system, sans-serif',
         '"Montserrat", -apple-system, sans-serif',
     ],
+    iconDecor: '/rebel-alliance.svg',
 };
 
 export default LightTheme;
