@@ -22,14 +22,13 @@ const SpeciesItem: React.FC<SpeciesItemProps> = ({
 }) => {
     return (
         <Item className={selected && 'active'}>
-            <AddOptionButton
+            <button
                 onClick={() =>
                     clickAction(searchActions.setSpeciesObject(species))
                 }
             >
-                <img alt={'add'} src={'/plus-sign.svg'} />
-            </AddOptionButton>
-            {children}
+                {children}
+            </button>
         </Item>
     );
 };

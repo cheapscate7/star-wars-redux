@@ -5,9 +5,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import CharacterList from './CharacterList';
 import SearchContext from '../../lib/withSeachContext';
-import dynamic from 'next/dynamic';
-
-const CharacterItem = dynamic(() => import('./listItems/CharacterItem'));
+import CharacterItem from './listItems/CharacterItem';
 
 const GET_CHARACTERS = gql`
     query getCharacters($filter: PersonFilter) {

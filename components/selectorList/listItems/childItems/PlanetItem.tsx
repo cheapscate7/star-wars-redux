@@ -1,4 +1,5 @@
 import AddOptionButton from '../AddOptionButton';
+import styled, { css } from 'styled-components';
 import { searchActions } from '../../../../lib/withSearch';
 import Item from './Item';
 
@@ -22,14 +23,13 @@ const PlanetItem: React.FC<SpeciesItemProps> = ({
 }) => {
     return (
         <Item className={selected && 'active'}>
-            <AddOptionButton
+            <button
                 onClick={() =>
                     clickAction(searchActions.setPlanetObject(planet))
                 }
             >
-                <img alt={'add'} src={'/plus-sign.svg'} />
-            </AddOptionButton>
-            {children}
+                {children}
+            </button>
         </Item>
     );
 };
