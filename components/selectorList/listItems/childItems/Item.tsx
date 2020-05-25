@@ -13,6 +13,7 @@ const Item = styled.li`
 
         &.active {
             border-right: 0.25em double ${theme.colors.foreground};
+            border-left: 0.25em double ${theme.colors.foreground};
         }
          {
             /*This gives the box the bold corners*/

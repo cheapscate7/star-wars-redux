@@ -17,7 +17,7 @@ const GET_CHARACTERS = gql`
 const CharacterListContainer: React.FC = () => {
     // @ts-ignore
     const { searchState } = React.useContext(SearchContext);
-
+    console.log('Search state', searchState);
     const { loading, error, data } = useQuery<
         IGetCharactersQuery,
         IGetCharactersQueryVariables
@@ -37,7 +37,7 @@ const CharacterListContainer: React.FC = () => {
         },
         skip: !searchState.combinedQueryParams.film.id,
     });
-    console.warn(error);
+
     return (
         <Container>
             <ListGroups>

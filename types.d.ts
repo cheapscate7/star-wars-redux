@@ -63,7 +63,6 @@ declare interface IGetCharactersQuery {
  */
 declare interface IFilmChildrenQuery {
     Film: {
-        title: string;
         species: ISpecies[];
         planets: IPlanet[];
     };

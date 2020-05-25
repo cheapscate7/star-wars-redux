@@ -11,6 +11,7 @@ import LoadingElement from '../LoadingElement';
 import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
 import SearchContext from '../..//lib/withSeachContext';
+import PlanetItem from './listItems/childItems/PlanetItem';
 
 const ALL_FILMS = gql`
     query {
@@ -24,7 +25,6 @@ const ALL_FILMS = gql`
 const FILM_CHILDREN = gql`
     query($id: ID) {
         Film(id: $id) {
-            title
             species {
                 id
                 name
@@ -116,8 +116,8 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                             {childQuery.data &&
                                 childQuery.data.Film.planets.map(
                                     (planet, index) => (
-                                        <SpeciesItem
-                                            species={planet}
+                                        <PlanetItem
+                                            planet={planet}
                                             key={`planet_${index}_${planet.name}`}
                                             selected={
                                                 searchState.combinedQueryParams
@@ -126,7 +126,7 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                                             clickAction={searchDispatch}
                                         >
                                             <span>{planet.name}</span>
-                                        </SpeciesItem>
+                                        </PlanetItem>
                                     )
                                 )}
                         </SelectorList>
