@@ -5,7 +5,7 @@ import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
-import withSearch from '../../lib/withSearch';
+import withSearch, { searchActions } from '../../lib/withSearch';
 import SpeciesItem from './listItems/childItems/SpeciesItem';
 import LoadingElement from '../LoadingElement';
 import Container from '../ListsShared/Container';
@@ -80,7 +80,6 @@ const SelectorListsContainer: React.FC = () => {
                                 selected={
                                     combinedQueryParams.film.id === film.id
                                 }
-                                clickAction={searchDispatch}
                             >
                                 <span>{film.title}</span>
                             </FilmItem>
@@ -99,7 +98,6 @@ const SelectorListsContainer: React.FC = () => {
                                                 combinedQueryParams.species
                                                     .id === species.id
                                             }
-                                            clickAction={searchDispatch}
                                         >
                                             <span>{species.name}</span>
                                         </SpeciesItem>
@@ -117,7 +115,6 @@ const SelectorListsContainer: React.FC = () => {
                                                 combinedQueryParams.planet
                                                     .id === planet.id
                                             }
-                                            clickAction={searchDispatch}
                                         >
                                             <span>{planet.name}</span>
                                         </PlanetItem>

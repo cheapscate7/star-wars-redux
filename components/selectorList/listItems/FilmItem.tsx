@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { searchActions } from '../../../lib/withSearch';
 import AddOptionButton from './AddOptionButton';
+import SearchContext from '../../../lib/withSeachContext';
 
 interface FilmItemProps extends IListItemProps {
     film: IFilm;
@@ -11,22 +12,24 @@ interface FilmItemProps extends IListItemProps {
  * renders an individual film's data in a <List> component
  * @param film  type: IFilm     the film data to be rendered
  * @param selected  type: boolean   triggers special css if film is selected
- * @param clickAction   type: function  action when button is pressed
  * @param children  type: DocumentNode
  * @constructor
  */
-const FilmItem: React.FC<FilmItemProps> = ({
-    film,
-    selected,
-    clickAction,
-    children,
-}) => {
+const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
+    const { searchDispatch } = React.useContext(SearchContext);
+
+    const handleClick = () => {
+        searchDispatch(
+            selected
+                ? searchActions.unsetFilmObject()
+                : searchActions.setFilmObject(film)
+        );
+    };
+
     return (
         <Item className={selected && 'active'}>
             {children}
-            <AddOptionButton
-                onClick={() => clickAction(searchActions.setFilmObject(film))}
-            >
+            <AddOptionButton onClick={handleClick}>
                 <img alt={'next option'} src={'/arrow-right.svg'} />
             </AddOptionButton>
         </Item>

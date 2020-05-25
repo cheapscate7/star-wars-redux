@@ -1,11 +1,5 @@
 import { useReducer } from 'react';
 
-interface ICombinedQueryParams {
-    film: IFilm;
-    species: ISpecies;
-    planet: IPlanet;
-}
-
 const initialState: IWithSearchState = {
     combinedQueryParams: {
         film: {
@@ -27,6 +21,9 @@ enum Actions {
     FilmObjectSet,
     SpeciesObjectSet,
     PlanetObjectSet,
+    FilmObjectUnset,
+    SpeciesObjectUnset,
+    PlanetObjectUnset,
     StateCleared,
 }
 
@@ -54,39 +51,74 @@ export const searchActions = {
             type: Actions.PlanetObjectSet,
         } as const;
     },
+    unsetFilmObject() {
+        return {
+            payload: {
+                id: '',
+                title: '',
+            },
+            type: Actions.FilmObjectUnset,
+        } as const;
+    },
+    unsetSpeciesObject() {
+        return {
+            payload: {
+                name: '',
+                title: '',
+            },
+            type: Actions.SpeciesObjectUnset,
+        } as const;
+    },
+    unsetPlanetObject() {
+        return {
+            payload: {
+                name: '',
+                title: '',
+            },
+            type: Actions.PlanetObjectUnset,
+        } as const;
+    },
 };
 interface IAction {
     type: Actions;
     payload: any;
 }
 function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
-    switch (action.type) {
-        case Actions.FilmObjectSet:
-            return {
-                combinedQueryParams: {
-                    ...initialState.combinedQueryParams,
-                    film: action.payload,
-                },
-            };
-        case Actions.SpeciesObjectSet:
-            return {
-                combinedQueryParams: {
-                    ...state.combinedQueryParams,
-                    species: action.payload,
-                },
-            };
-        case Actions.PlanetObjectSet:
-            return {
-                combinedQueryParams: {
-                    ...state.combinedQueryParams,
-                    planet: action.payload,
-                },
-            };
-        case Actions.StateCleared:
-            return initialState;
+    if (
+        action.type === Actions.FilmObjectSet ||
+        action.type === Actions.FilmObjectUnset
+    ) {
+        return {
+            combinedQueryParams: {
+                ...initialState.combinedQueryParams,
+                film: action.payload,
+            },
+        };
+    } else if (
+        action.type === Actions.SpeciesObjectSet ||
+        action.type === Actions.SpeciesObjectUnset
+    ) {
+        return {
+            combinedQueryParams: {
+                ...state.combinedQueryParams,
+                species: action.payload,
+            },
+        };
+    } else if (
+        action.type === Actions.PlanetObjectSet ||
+        action.type === Actions.PlanetObjectUnset
+    ) {
+        return {
+            combinedQueryParams: {
+                ...state.combinedQueryParams,
+                planet: action.payload,
+            },
+        };
+    } else if (action.type === Actions.StateCleared) {
+        return initialState;
+    } else {
+        return state;
     }
-
-    return state;
 }
 
 const withSearch = () => {
