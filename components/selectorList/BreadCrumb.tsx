@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
 import { rgba } from 'polished';
+import SearchContext from '../../lib/withSeachContext';
+import { searchActions } from '../../lib/withSearch';
 
 interface IBreadCrumbProps {
     items: string[];
@@ -13,6 +15,11 @@ interface IBreadCrumbProps {
  * @constructor
  */
 const BreadCrumb: React.FC<IBreadCrumbProps> = ({ items }) => {
+    const { searchDispatch } = React.useContext(SearchContext);
+
+    const handleClear = () => {
+        searchDispatch(searchActions.reset());
+    };
     return (
         <BreadCrumbContainer show={items.length > 0}>
             {items.map(
@@ -23,6 +30,9 @@ const BreadCrumb: React.FC<IBreadCrumbProps> = ({ items }) => {
                             {index !== items.length - 1 && <Divider>|</Divider>}
                         </React.Fragment>
                     )
+            )}
+            {items.length > 0 && (
+                <ClearButton onClick={handleClear}>x</ClearButton>
             )}
         </BreadCrumbContainer>
     );
@@ -84,4 +94,16 @@ const BreadCrumbItem = styled.div`
     &:not(:first-child):not(:last-child) {
         margin: auto 0.25em;
     }
+`;
+
+const ClearButton = styled.button`
+    border: 0;
+    cursor: pointer;
+    padding: 0.25em 0.75em;
+    border-radius: 2px;
+    ${({ theme }) => css`
+        background-color: ${theme.colors.background};
+        color: ${theme.colors.foreground};
+        font-weight: ${theme.fontWeights.bold};
+    `};
 `;
