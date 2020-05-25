@@ -3,12 +3,13 @@
     "version": "1.0.0",
     "main": "index.js",
     "repository": "https://github.com/cheapscate7/star-wars-redux.git",
-    "author": "Matthew Badcock <matthewlisterb@gmail.com>",
+    "author": "Matthew Badcock <matthewdbadcock@gmail.com>",
     "license": "MIT",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
+        "export": "next build && next export",
         "cypress:open": "cypress open"
     },
     "devDependencies": {

@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import Head from 'next/head';
 import Layout from '../components/Layout';
 import { withApollo } from '../lib/apollo';
 import SelectorListsContainer from '../components/selectorList/SelectorListsContainer';
@@ -14,10 +13,12 @@ const Home: NextPage<HomeProps> = () => {
     const searchStore = withSearch();
     return (
         <>
-            <Head>
-                <meta name="Description" content="" />
-            </Head>
-            <Layout>
+            <Layout
+                title={'Home'}
+                description={
+                    'Star Wars Database is the best place to go in order to find all the Star Wars information you need'
+                }
+            >
                 <SearchContext.Provider value={searchStore}>
                     <SelectorListsContainer />
                     <CharacterListContainer />
@@ -25,6 +26,10 @@ const Home: NextPage<HomeProps> = () => {
             </Layout>
         </>
     );
+};
+
+Home.defaultProps = (ctx) => {
+    console.log(ctx);
 };
 
 export default withApollo({ ssr: true })(Home);
