@@ -41,7 +41,7 @@ declare interface IFilm extends ISWNode {
  */
 declare interface ICharacter {
     name: string;
-    species: ISpecies;
+    species: ISpecies[];
     homeworld: IPlanet;
     birthYear: string;
 }

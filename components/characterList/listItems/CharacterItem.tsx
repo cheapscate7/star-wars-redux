@@ -10,6 +10,7 @@ const CharacterItem: React.FC<CharacterItemProps> = ({
     selected,
     children,
 }) => {
+    console.log(character);
     return (
         <Item className={selected && 'active'}>
             {children ? (
@@ -20,10 +21,10 @@ const CharacterItem: React.FC<CharacterItemProps> = ({
                 <div>
                     <h2>{character.name}</h2>
                     <h3>
-                        {character.homeworld.name} -{' '}
-                        {character.birthYear || '???BBY'}
+                        {character.homeworld.name}{' '}
+                        <Italics>- {character.birthYear || '???BBY'}</Italics>
                     </h3>
-                    <p>{character.species.name}</p>
+                    <p>{character.species[0].name}</p>
                 </div>
             )}
         </Item>
@@ -47,4 +48,8 @@ const Item = styled.div`
             font-family: ${theme.fonts[2] || theme.fonts[0]};
         `};
     }
+`;
+
+const Italics = styled.span`
+    font-style: italic;
 `;
