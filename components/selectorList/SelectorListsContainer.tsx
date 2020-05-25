@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import BreadCrumb from './BreadCrumb';
 import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
@@ -44,88 +44,92 @@ const FILM_CHILDREN = gql`
  * @constructor
  */
 const SelectorListsContainer: React.FC = ({ children }) => {
-    const masterQuery = useQuery<IAll_films_data>(ALL_FILMS);
+    const masterQuery = useQuery<IAllFilmsQuery>(ALL_FILMS);
     //@ts-ignore
     const { searchState, searchDispatch } = React.useContext(SearchContext);
-    const childQuery = useQuery<IFilmChildrenData>(FILM_CHILDREN, {
+    const childQuery = useQuery<
+        IFilmChildrenQuery,
+        IFilmChildrenQueryVariables
+    >(FILM_CHILDREN, {
         variables: {
-            id: searchState.currentFilmId || null,
+            id: searchState.combinedQueryParams.film.id || null,
         },
-        skip: !searchState.currentFilmId,
+        skip: !searchState.combinedQueryParams.film.id,
     });
 
-    return (
-        <>
-            <Container>
-                <BreadCrumb>
-                    <div>{searchState.combinedQueryParams.film.title}</div>
-                    {searchState.combinedQueryParams.film.title &&
-                        (searchState.combinedQueryParams.species.name ||
-                            searchState.combinedQueryParams.planet.name) && (
-                            <Divider>|</Divider>
-                        )}
-                    <div>{searchState.combinedQueryParams.species.name}</div>
-                    {searchState.combinedQueryParams.film.title &&
-                        searchState.combinedQueryParams.species.name &&
-                        searchState.combinedQueryParams.planet.name && (
-                            <Divider>|</Divider>
-                        )}
-                    <div>{searchState.combinedQueryParams.planet.name}</div>
-                </BreadCrumb>
+    let showChildren = !!searchState.combinedQueryParams.film.id;
 
-                <ListGroups>
-                    <SelectorList loading={masterQuery.loading}>
-                        {masterQuery.data &&
-                            masterQuery.data.allFilms.map((film, index) => (
-                                <FilmItem
-                                    key={`${film.title}_${index}`}
-                                    film={film}
-                                    selected={
-                                        searchState.currentFilmId === film.id
-                                    }
-                                    clickAction={searchDispatch}
-                                >
-                                    <span>{film.title}</span>
-                                </FilmItem>
-                            ))}
-                    </SelectorList>
-                    {searchState.currentFilmId && (
-                        <LoadingElement loading={childQuery.loading}>
-                            <SelectorList>
-                                {childQuery.data &&
-                                    childQuery.data.Film.species.map(
-                                        (species, index) => (
-                                            <SpeciesItem
-                                                species={species}
-                                                key={`species_${index}_${species.name}`}
-                                                selected={false}
-                                                clickAction={() => {}}
-                                            >
-                                                <span>{species.name}</span>
-                                            </SpeciesItem>
-                                        )
-                                    )}
-                            </SelectorList>
-                            <SelectorList>
-                                {childQuery.data &&
-                                    childQuery.data.Film.planets.map(
-                                        (planet, index) => (
-                                            <SpeciesItem
-                                                species={planet}
-                                                key={`species_${index}_${planet.name}`}
-                                                selected={false}
-                                                clickAction={() => {}}
-                                            >
-                                                <span>{planet.name}</span>
-                                            </SpeciesItem>
-                                        )
-                                    )}
-                            </SelectorList>
-                        </LoadingElement>
+    return (
+        <Container>
+            <BreadCrumb>
+                <div>{searchState.combinedQueryParams.film.title}</div>
+                {searchState.combinedQueryParams.film.title &&
+                    (searchState.combinedQueryParams.species.name ||
+                        searchState.combinedQueryParams.planet.name) && (
+                        <Divider>|</Divider>
                     )}
-                </ListGroups>
-            </Container>
-        </>
+                <div>{searchState.combinedQueryParams.species.name}</div>
+                {searchState.combinedQueryParams.film.title &&
+                    searchState.combinedQueryParams.species.name &&
+                    searchState.combinedQueryParams.planet.name && (
+                        <Divider>|</Divider>
+                    )}
+                <div>{searchState.combinedQueryParams.planet.name}</div>
+            </BreadCrumb>
+
+            <ListGroups>
+                <SelectorList loading={masterQuery.loading}>
+                    {masterQuery.data &&
+                        masterQuery.data.allFilms.map((film, index) => (
+                            <FilmItem
+                                key={`${film.title}_${index}`}
+                                film={film}
+                                selected={
+                                    searchState.combinedQueryParams.film.id ===
+                                    film.id
+                                }
+                                clickAction={searchDispatch}
+                            >
+                                <span>{film.title}</span>
+                            </FilmItem>
+                        ))}
+                </SelectorList>
+                {showChildren && (
+                    <LoadingElement loading={childQuery.loading}>
+                        <SelectorList>
+                            {childQuery.data &&
+                                childQuery.data.Film.species.map(
+                                    (species, index) => (
+                                        <SpeciesItem
+                                            species={species}
+                                            key={`species_${index}_${species.name}`}
+                                            selected={false}
+                                            clickAction={() => {}}
+                                        >
+                                            <span>{species.name}</span>
+                                        </SpeciesItem>
+                                    )
+                                )}
+                        </SelectorList>
+                        <SelectorList>
+                            {childQuery.data &&
+                                childQuery.data.Film.planets.map(
+                                    (planet, index) => (
+                                        <SpeciesItem
+                                            species={planet}
+                                            key={`species_${index}_${planet.name}`}
+                                            selected={false}
+                                            clickAction={() => {}}
+                                        >
+                                            <span>{planet.name}</span>
+                                        </SpeciesItem>
+                                    )
+                                )}
+                        </SelectorList>
+                    </LoadingElement>
+                )}
+            </ListGroups>
+        </Container>
     );
 };
 

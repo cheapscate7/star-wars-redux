@@ -24,6 +24,6 @@ const Container = styled.ul`
     transition: width 1s ease;
     ${({ theme }) => css`
         font-family: ${theme.fonts[1] || theme.fonts[0]};
-        border-bottom: 1px solid ${theme.colors.highlight_1_contrast};
+        border-bottom: 1px solid ${theme.colors.foreground};
     `};
 `;

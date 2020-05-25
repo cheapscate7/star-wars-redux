@@ -6,10 +6,6 @@ interface ICombinedQueryParams {
     planet: IPlanet;
 }
 
-interface IWithSearchState {
-    combinedQueryParams: ICombinedQueryParams;
-}
-
 const initialState: IWithSearchState = {
     combinedQueryParams: {
         film: {
@@ -41,6 +37,7 @@ export const searchActions = {
         } as const;
     },
     setFilmObject(obj: IFilm) {
+        console.log('i was called', obj);
         return {
             payload: obj,
             type: Actions.FilmObjectSet,
@@ -63,19 +60,26 @@ interface IAction {
     type: Actions;
     payload: any;
 }
-function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
+function reducer(state: IWithSearchState, action): IWithSearchState {
+    console.log(action);
     switch (action.type) {
-        case Actions.StateCleared:
-            return initialState;
-        case Actions.FilmObjectSet:
-            state.combinedQueryParams.film = action.payload;
-            return state;
-        case Actions.SpeciesObjectSet:
+        case 0:
+            const newState = {
+                combinedQueryParams: {
+                    ...state.combinedQueryParams,
+                    film: action.payload,
+                },
+            };
+            console.log(newState);
+            return newState;
+        case 1:
             state.combinedQueryParams.species = action.payload;
             return state;
-        case Actions.PlanetObjectSet:
+        case 2:
             state.combinedQueryParams.planet = action.payload;
             return state;
+        case 3:
+            return initialState;
     }
 
     return state;

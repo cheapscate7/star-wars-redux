@@ -43,18 +43,25 @@ declare interface ICharacter {
  * GraphQL query types
  */
 /**
- * IAll_films_data
+ * IAllFilmsQuery
  * the master list that all other lists rely on contains the films of the franchise
  */
-declare interface IAll_films_data {
+declare interface IAllFilmsQuery {
     allFilms: IFilm[];
 }
 
 /**
- * IFilmChildrenData
+ * IGetCharactersQuery
+ */
+declare interface IGetCharactersQuery {
+    allPersons: { name: string }[];
+}
+
+/**
+ * IFilmChildrenQuery
  * lists of species and planets rely on a film
  */
-declare interface IFilmChildrenData {
+declare interface IFilmChildrenQuery {
     Film: {
         title: string;
         species: ISpecies[];
@@ -62,7 +69,11 @@ declare interface IFilmChildrenData {
     };
 }
 
-declare interface ICharactersQueryVariables {
+declare interface IFilmChildrenQueryVariables {
+    id: string | null;
+}
+
+declare interface IGetCharactersQueryVariables {
     filter: {
         homeworld?: { id: string | undefined };
         films_every?: { id: string | undefined };
@@ -86,6 +97,17 @@ declare interface IListItemProps {
 
 declare interface IListProps {
     loading?: boolean;
+}
+
+/**
+ * States
+ */
+
+/**
+ * withSearch
+ */
+declare interface IWithSearchState {
+    combinedQueryParams: ICombinedQueryParams;
 }
 
 /**
