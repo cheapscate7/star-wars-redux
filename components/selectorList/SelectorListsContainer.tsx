@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
 import withSearch from '../../lib/withSearch';
-import SpeciesItem from './listItems/SpeciesItem';
+import SpeciesItem from './listItems/childItems/SpeciesItem';
 import LoadingElement from '../LoadingElement';
 import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
@@ -64,13 +64,11 @@ const SelectorListsContainer: React.FC = ({ children }) => {
             <BreadCrumb>
                 <div>{searchState.combinedQueryParams.film.title}</div>
                 {searchState.combinedQueryParams.film.title &&
-                    (searchState.combinedQueryParams.species.name ||
-                        searchState.combinedQueryParams.planet.name) && (
+                    searchState.combinedQueryParams.species.name && (
                         <Divider>|</Divider>
                     )}
                 <div>{searchState.combinedQueryParams.species.name}</div>
                 {searchState.combinedQueryParams.film.title &&
-                    searchState.combinedQueryParams.species.name &&
                     searchState.combinedQueryParams.planet.name && (
                         <Divider>|</Divider>
                     )}
@@ -103,8 +101,11 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                                         <SpeciesItem
                                             species={species}
                                             key={`species_${index}_${species.name}`}
-                                            selected={false}
-                                            clickAction={() => {}}
+                                            selected={
+                                                searchState.combinedQueryParams
+                                                    .species.id === species.id
+                                            }
+                                            clickAction={searchDispatch}
                                         >
                                             <span>{species.name}</span>
                                         </SpeciesItem>
@@ -117,9 +118,12 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                                     (planet, index) => (
                                         <SpeciesItem
                                             species={planet}
-                                            key={`species_${index}_${planet.name}`}
-                                            selected={false}
-                                            clickAction={() => {}}
+                                            key={`planet_${index}_${planet.name}`}
+                                            selected={
+                                                searchState.combinedQueryParams
+                                                    .planet.id === planet.id
+                                            }
+                                            clickAction={searchDispatch}
                                         >
                                             <span>{planet.name}</span>
                                         </SpeciesItem>
@@ -136,7 +140,7 @@ const SelectorListsContainer: React.FC = ({ children }) => {
 export default SelectorListsContainer;
 
 const Divider = styled.span`
-    &:last-child {
+    &:only-child {
         display: none;
     }
 `;

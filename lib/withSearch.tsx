@@ -37,7 +37,6 @@ export const searchActions = {
         } as const;
     },
     setFilmObject(obj: IFilm) {
-        console.log('i was called', obj);
         return {
             payload: obj,
             type: Actions.FilmObjectSet,
@@ -60,25 +59,30 @@ interface IAction {
     type: Actions;
     payload: any;
 }
-function reducer(state: IWithSearchState, action): IWithSearchState {
-    console.log(action);
+function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
     switch (action.type) {
-        case 0:
-            const newState = {
+        case Actions.FilmObjectSet:
+            return {
                 combinedQueryParams: {
                     ...state.combinedQueryParams,
                     film: action.payload,
                 },
             };
-            console.log(newState);
-            return newState;
-        case 1:
-            state.combinedQueryParams.species = action.payload;
-            return state;
-        case 2:
-            state.combinedQueryParams.planet = action.payload;
-            return state;
-        case 3:
+        case Actions.SpeciesObjectSet:
+            return {
+                combinedQueryParams: {
+                    ...state.combinedQueryParams,
+                    species: action.payload,
+                },
+            };
+        case Actions.PlanetObjectSet:
+            return {
+                combinedQueryParams: {
+                    ...state.combinedQueryParams,
+                    planet: action.payload,
+                },
+            };
+        case Actions.StateCleared:
             return initialState;
     }
 
