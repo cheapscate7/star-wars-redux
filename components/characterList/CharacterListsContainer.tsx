@@ -5,17 +5,26 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import CharacterList from './CharacterList';
 import SearchContext from '../../lib/withSeachContext';
+import CharacterItem from './listItems/CharacterItem';
 
 const GET_CHARACTERS = gql`
     query($filter: PersonFilter) {
         allPersons(filter: $filter) {
             name
+            species {
+                id
+                name
+            }
+            birthYear
+            homeworld {
+                id
+                name
+            }
         }
     }
 `;
 
 const CharacterListContainer: React.FC = () => {
-    // @ts-ignore
     const { searchState } = React.useContext(SearchContext);
     console.log('Search state', searchState);
     const { loading, error, data } = useQuery<
@@ -45,10 +54,16 @@ const CharacterListContainer: React.FC = () => {
                     <CharacterList loading={loading}>
                         {data && data.allPersons.length > 0 ? (
                             data.allPersons.map((person, index) => (
-                                <p key={index}>{person.name}</p>
+                                <CharacterItem
+                                    character={person}
+                                    selected={false}
+                                    key={index}
+                                />
                             ))
                         ) : (
-                            <p>no results</p>
+                            <CharacterItem character={null} selected={false}>
+                                no results
+                            </CharacterItem>
                         )}
                     </CharacterList>
                 )}

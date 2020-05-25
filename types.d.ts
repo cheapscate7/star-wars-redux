@@ -35,8 +35,15 @@ declare interface IFilm extends ISWNode {
     title: string;
 }
 
+/**
+ * ICharacter
+ * a particular character
+ */
 declare interface ICharacter {
     name: string;
+    species: ISpecies;
+    homeworld: IPlanet;
+    birthYear: string;
 }
 
 /**
@@ -54,7 +61,7 @@ declare interface IAllFilmsQuery {
  * IGetCharactersQuery
  */
 declare interface IGetCharactersQuery {
-    allPersons: { name: string }[];
+    allPersons: ICharacter[];
 }
 
 /**
@@ -74,9 +81,9 @@ declare interface IFilmChildrenQueryVariables {
 
 declare interface IGetCharactersQueryVariables {
     filter: {
-        homeworld?: { id: string | undefined };
-        films_every?: { id: string | undefined };
-        species_every?: { id: string | undefined };
+        homeworld?: { id: string | null };
+        films_every?: { id: string | null };
+        species_every?: { id: string | null };
     };
 }
 
@@ -91,7 +98,7 @@ declare interface IGetCharactersQueryVariables {
  */
 declare interface IListItemProps {
     selected: boolean;
-    clickAction: any;
+    clickAction?: Function;
 }
 
 declare interface IListProps {
@@ -136,4 +143,5 @@ declare interface Theme {
     };
     shadows?: string[];
     fonts: string[];
+    iconDecor: string;
 }

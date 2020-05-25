@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import React from 'react';
 import LoadingElement from '../LoadingElement';
 
@@ -16,6 +14,7 @@ export default CharacterList;
 
 const List = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, 200px);
     width: 100%;
+    padding: 1em 2em;
 `;

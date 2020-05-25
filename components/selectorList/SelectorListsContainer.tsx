@@ -12,6 +12,7 @@ import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
 import SearchContext from '../..//lib/withSeachContext';
 import PlanetItem from './listItems/childItems/PlanetItem';
+import removeUndefined from '../../lib/helpers/arrays';
 
 const ALL_FILMS = gql`
     query {
@@ -43,37 +44,32 @@ const FILM_CHILDREN = gql`
  * also has a breadcrumb
  * @constructor
  */
-const SelectorListsContainer: React.FC = ({ children }) => {
+const SelectorListsContainer: React.FC = () => {
     const masterQuery = useQuery<IAllFilmsQuery>(ALL_FILMS);
     //@ts-ignore
     const { searchState, searchDispatch } = React.useContext(SearchContext);
+    const { combinedQueryParams } = searchState;
     const childQuery = useQuery<
         IFilmChildrenQuery,
         IFilmChildrenQueryVariables
     >(FILM_CHILDREN, {
         variables: {
-            id: searchState.combinedQueryParams.film.id || null,
+            id: combinedQueryParams.film.id || null,
         },
-        skip: !searchState.combinedQueryParams.film.id,
+        skip: !combinedQueryParams.film.id,
     });
 
-    let showChildren = !!searchState.combinedQueryParams.film.id;
+    let showChildren = !!combinedQueryParams.film.id;
 
     return (
         <Container>
-            <BreadCrumb>
-                <div>{searchState.combinedQueryParams.film.title}</div>
-                {searchState.combinedQueryParams.film.title &&
-                    searchState.combinedQueryParams.species.name && (
-                        <Divider>|</Divider>
-                    )}
-                <div>{searchState.combinedQueryParams.species.name}</div>
-                {searchState.combinedQueryParams.film.title &&
-                    searchState.combinedQueryParams.planet.name && (
-                        <Divider>|</Divider>
-                    )}
-                <div>{searchState.combinedQueryParams.planet.name}</div>
-            </BreadCrumb>
+            <BreadCrumb
+                items={removeUndefined([
+                    combinedQueryParams.film.title,
+                    combinedQueryParams.species.name,
+                    combinedQueryParams.planet.name,
+                ])}
+            />
 
             <ListGroups>
                 <SelectorList loading={masterQuery.loading}>
@@ -83,8 +79,7 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                                 key={`${film.title}_${index}`}
                                 film={film}
                                 selected={
-                                    searchState.combinedQueryParams.film.id ===
-                                    film.id
+                                    combinedQueryParams.film.id === film.id
                                 }
                                 clickAction={searchDispatch}
                             >
@@ -102,8 +97,8 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                                             species={species}
                                             key={`species_${index}_${species.name}`}
                                             selected={
-                                                searchState.combinedQueryParams
-                                                    .species.id === species.id
+                                                combinedQueryParams.species
+                                                    .id === species.id
                                             }
                                             clickAction={searchDispatch}
                                         >
@@ -120,8 +115,8 @@ const SelectorListsContainer: React.FC = ({ children }) => {
                                             planet={planet}
                                             key={`planet_${index}_${planet.name}`}
                                             selected={
-                                                searchState.combinedQueryParams
-                                                    .planet.id === planet.id
+                                                combinedQueryParams.planet
+                                                    .id === planet.id
                                             }
                                             clickAction={searchDispatch}
                                         >
@@ -138,9 +133,3 @@ const SelectorListsContainer: React.FC = ({ children }) => {
 };
 
 export default SelectorListsContainer;
-
-const Divider = styled.span`
-    &:only-child {
-        display: none;
-    }
-`;
