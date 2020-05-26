@@ -75,6 +75,9 @@ export default BreadCrumb;
 const Divider = styled.span`
     transition: all 0.3s linear;
     margin: auto 0.25em;
+    ${({ theme }) => css`
+        color: ${theme.colors.foreground};
+    `};
     &:only-child,
     &:last-child {
         display: none;
@@ -82,6 +85,9 @@ const Divider = styled.span`
 `;
 
 const BreadCrumbItem = styled.div`
+    ${({ theme }) => css`
+        color: ${theme.colors.foreground};
+    `};
     &:first-child:not(:only-child) {
         margin-right: 0.5em;
     }
@@ -102,7 +108,7 @@ const ClearButton = styled.button`
     padding: 0.25em 0.75em;
     border-radius: 2px;
     ${({ theme }) => css`
-        background-color: ${theme.colors.background};
+        background-color: ${theme.colors.highlight_1};
         color: ${theme.colors.foreground};
         font-weight: ${theme.fontWeights.bold};
         font-size: ${theme.fontSizes.small};

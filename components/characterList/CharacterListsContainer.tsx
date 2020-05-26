@@ -113,12 +113,12 @@ const GotoButton = styled.button`
     padding: 1em 1.5em;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    color: white;
     border: 0;
     outline: none;
     transition: background-color 0.3s;
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
+        color: ${theme.colors.foreground};
         &:hover {
             background-color: ${theme.colors.highlight_1};
         }

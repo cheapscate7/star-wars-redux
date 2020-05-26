@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import LightTheme from '../themes/Light';
+import DarkTheme from '../themes/Dark';
 import GlobalStyle from '../components/global';
 import { ThemeProvider } from 'styled-components';
 
@@ -16,7 +17,7 @@ const app = ({ Component, pageProps }) => {
                 <link rel="shortcut icon" href="/icon-16.webp" />
                 <meta name="theme-color" content="#ffffff" />
             </Head>
-            <ThemeProvider theme={LightTheme}>
+            <ThemeProvider theme={DarkTheme}>
                 <GlobalStyle />
                 <Component {...pageProps} />
             </ThemeProvider>

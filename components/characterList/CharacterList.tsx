@@ -43,6 +43,7 @@ const Container = styled.section`
     padding: 0 1em;
     ${({ theme }) => css`
         font-family: ${theme.fonts[2] || theme.fonts[0]};
+        color: ${theme.colors.foreground};
         @keyframes flash-animation {
             0% {
                 background-color: ${theme.colors.foreground};
@@ -74,8 +75,10 @@ const List = styled.div`
 const Search = styled.input`
     background-color: transparent;
     padding: 0.75em 1.2em;
+    outline: none;
     ${({ theme }) => css`
         border: 1px solid ${theme.colors.foreground};
+        color: ${theme.colors.foreground};
         &:focus {
             border: 1px solid ${theme.colors.highlight_1};
         }
