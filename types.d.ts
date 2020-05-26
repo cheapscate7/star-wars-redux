@@ -119,6 +119,14 @@ declare interface IWithSearchState {
 }
 
 /**
+ * withCharacterSearchContext
+ */
+declare interface IWithCharacterSearchState {
+    characters: ICharacter[];
+    searchTerm: string;
+}
+
+/**
  * THEME
  */
 declare interface Theme {

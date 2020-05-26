@@ -2,7 +2,6 @@ import { useReducer } from 'react';
 
 const initialState: IWithCharacterSearchState = {
     characters: [],
-    charactersFiltered: [],
     searchTerm: '',
 };
 

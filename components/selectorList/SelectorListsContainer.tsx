@@ -1,40 +1,25 @@
-import styled from 'styled-components';
-import React, { useEffect } from 'react';
-import BreadCrumb from './BreadCrumb';
+import React from 'react';
+// import BreadCrumb from './BreadCrumb';
 import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
-import withSearch, { searchActions } from '../../lib/withSearch';
-import SpeciesItem from './listItems/childItems/SpeciesItem';
 import LoadingElement from '../LoadingElement';
 import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
 import SearchContext from '../..//lib/withSeachContext';
-import PlanetItem from './listItems/childItems/PlanetItem';
 import removeUndefined from '../../lib/helpers/arrays';
-import SelectorListChildrenContainer from './SelectorListChildrenContainer';
+import dynamic from 'next/dynamic';
+const SelectorListChildrenContainer = dynamic(
+    import('./SelectorListChildrenContainer')
+);
+const BreadCrumb = dynamic(import('./BreadCrumb'));
 
 const ALL_FILMS = gql`
     query getAllFilms {
         allFilms {
             id
             title
-        }
-    }
-`;
-
-const FILM_CHILDREN = gql`
-    query getSpeciesAndPlanetsFromFilm($id: ID) {
-        Film(id: $id) {
-            species {
-                id
-                name
-            }
-            planets {
-                id
-                name
-            }
         }
     }
 `;
@@ -47,19 +32,8 @@ const FILM_CHILDREN = gql`
  */
 const SelectorListsContainer: React.FC = () => {
     const masterQuery = useQuery<IAllFilmsQuery>(ALL_FILMS);
-    const { searchState, searchDispatch } = React.useContext(SearchContext);
+    const { searchState } = React.useContext(SearchContext);
     const { combinedQueryParams } = searchState;
-    const childQuery = useQuery<
-        IFilmChildrenQuery,
-        IFilmChildrenQueryVariables
-    >(FILM_CHILDREN, {
-        variables: {
-            id: combinedQueryParams.film.id || null,
-        },
-        skip: !combinedQueryParams.film.id,
-    });
-
-    let showChildren = !!combinedQueryParams.film.id;
 
     return (
         <Container>
@@ -86,7 +60,9 @@ const SelectorListsContainer: React.FC = () => {
                             </FilmItem>
                         ))}
                 </SelectorList>
-                {showChildren && <SelectorListChildrenContainer />}
+                {combinedQueryParams.film.id && (
+                    <SelectorListChildrenContainer />
+                )}
             </ListGroups>
         </Container>
     );
