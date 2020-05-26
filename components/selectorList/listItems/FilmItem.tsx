@@ -30,7 +30,7 @@ const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
         <Item className={selected && 'active'}>
             {children}
             <AddOptionButton onClick={handleClick}>
-                <object data={'/arrow-right.svg'} />
+                <img alt={'next option'} src={'/arrow-right.svg'} />
             </AddOptionButton>
         </Item>
     );

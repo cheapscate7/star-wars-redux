@@ -4,11 +4,23 @@ import LightTheme from '../themes/Light';
 import DarkTheme from '../themes/Dark';
 import GlobalStyle from '../components/global';
 import { ThemeProvider } from 'styled-components';
-import withThemeManager from '../lib/withThemeManager';
+import withThemeManager, { themeManagerActions } from '../lib/withThemeManager';
 import ThemeManagerContext from '../lib/withThemeManagerContext';
+import { useEffect } from 'react';
 
 const app = ({ Component, pageProps }) => {
     const themeStore = withThemeManager();
+    useEffect(() => {
+        const theme = localStorage.getItem('theme');
+        theme &&
+            themeStore.themeManagerDispatch(
+                themeManagerActions.setTheme(theme)
+            );
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('theme', themeStore.themeManagerState.theme);
+    }, [themeStore.themeManagerState.theme]);
 
     return (
         <React.Fragment>

@@ -10,6 +10,7 @@ const initialState: IWithThemeManagerState = {
 
 enum Actions {
     themeToggle,
+    themeSet,
 }
 
 export const themeManagerActions = {
@@ -17,6 +18,12 @@ export const themeManagerActions = {
         return {
             type: Actions.themeToggle,
         } as const;
+    },
+    setTheme(theme: string) {
+        return {
+            type: Actions.themeSet,
+            payload: theme,
+        };
     },
 };
 interface IAction {
@@ -30,6 +37,10 @@ function reducer(
     if (action.type === Actions.themeToggle) {
         return {
             theme: state.theme === 'light' ? 'dark' : 'light',
+        };
+    } else if (action.type === Actions.themeSet) {
+        return {
+            theme: action.payload,
         };
     } else {
         return state;
