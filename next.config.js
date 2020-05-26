@@ -9,6 +9,10 @@ module.exports = withFonts({
     },
     env: {},
     webpack(config, options) {
+        /**
+         * for font loading
+         * https://github.com/rohanray/next-fonts-example/blob/master/with-styled-comp/next.config.js
+         */
         if (options.isServer) {
             const antStyles = /antd\/.*?\/style\/css.*?/;
             const origExternals = [...config.externals];
