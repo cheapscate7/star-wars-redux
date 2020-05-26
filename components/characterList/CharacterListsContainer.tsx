@@ -24,6 +24,17 @@ const GET_CHARACTERS = gql`
     }
 `;
 
+/**
+ * removes values of the filter with a null id
+ * @param filter
+ */
+const buildFilter = (filter) => {
+    Object.keys(filter).forEach(
+        (key) => filter[key].id === null && delete filter[key]
+    );
+    return filter;
+};
+
 const CharacterListContainer: React.FC = () => {
     const { searchState } = React.useContext(SearchContext);
     const { loading, data } = useQuery<
@@ -31,17 +42,17 @@ const CharacterListContainer: React.FC = () => {
         IGetCharactersQueryVariables
     >(GET_CHARACTERS, {
         variables: {
-            filter: {
+            filter: buildFilter({
                 homeworld: {
                     id: searchState.combinedQueryParams.planet.id || null,
                 },
                 films_some: {
                     id: searchState.combinedQueryParams.film.id || null,
                 },
-                species_every: {
+                species_some: {
                     id: searchState.combinedQueryParams.species.id || null,
                 },
-            },
+            }),
         },
         skip: !searchState.combinedQueryParams.film.id,
     });

@@ -83,7 +83,7 @@ declare interface IGetCharactersQueryVariables {
     filter: {
         homeworld?: { id: string | null };
         films_some?: { id: string | null };
-        species_every?: { id: string | null };
+        species_some?: { id: string | null };
     };
 }
 
