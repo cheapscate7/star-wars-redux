@@ -28,6 +28,7 @@ const CharacterList: React.FC<IListProps> = ({
                 element={Search}
                 value={characterSearchState.searchTerm}
                 onChange={updateSearchTerm}
+                placeholder={'Character Name'}
             />
             <List>
                 <LoadingElement loading={loading}>{children}</LoadingElement>
