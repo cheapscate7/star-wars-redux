@@ -1,10 +1,27 @@
 import * as React from 'react';
 import Head from 'next/head';
 import LightTheme from '../themes/Light';
+import DarkTheme from '../themes/Dark';
 import GlobalStyle from '../components/global';
 import { ThemeProvider } from 'styled-components';
+import withThemeManager, { themeManagerActions } from '../lib/withThemeManager';
+import ThemeManagerContext from '../lib/withThemeManagerContext';
+import { useEffect } from 'react';
 
 const app = ({ Component, pageProps }) => {
+    const themeStore = withThemeManager();
+    useEffect(() => {
+        const theme = localStorage.getItem('theme');
+        theme &&
+            themeStore.themeManagerDispatch(
+                themeManagerActions.setTheme(theme)
+            );
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('theme', themeStore.themeManagerState.theme);
+    }, [themeStore.themeManagerState.theme]);
+
     return (
         <React.Fragment>
             <Head>
@@ -16,10 +33,18 @@ const app = ({ Component, pageProps }) => {
                 <link rel="shortcut icon" href="/icon-16.webp" />
                 <meta name="theme-color" content="#ffffff" />
             </Head>
-            <ThemeProvider theme={LightTheme}>
-                <GlobalStyle />
-                <Component {...pageProps} />
-            </ThemeProvider>
+            <ThemeManagerContext.Provider value={themeStore}>
+                <ThemeProvider
+                    theme={
+                        themeStore.themeManagerState.theme === 'light'
+                            ? LightTheme
+                            : DarkTheme
+                    }
+                >
+                    <GlobalStyle />
+                    <Component {...pageProps} />
+                </ThemeProvider>
+            </ThemeManagerContext.Provider>
         </React.Fragment>
     );
 };
