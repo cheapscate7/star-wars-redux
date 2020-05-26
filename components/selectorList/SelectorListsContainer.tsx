@@ -13,6 +13,7 @@ import ListGroups from '../ListsShared/ListGroups';
 import SearchContext from '../..//lib/withSeachContext';
 import PlanetItem from './listItems/childItems/PlanetItem';
 import removeUndefined from '../../lib/helpers/arrays';
+import SelectorListChildrenContainer from './SelectorListChildrenContainer';
 
 const ALL_FILMS = gql`
     query getAllFilms {
@@ -85,44 +86,7 @@ const SelectorListsContainer: React.FC = () => {
                             </FilmItem>
                         ))}
                 </SelectorList>
-                {showChildren && (
-                    <LoadingElement loading={childQuery.loading}>
-                        <SelectorList title={'// Species'}>
-                            {childQuery.data &&
-                                childQuery.data.Film.species.map(
-                                    (species, index) => (
-                                        <SpeciesItem
-                                            species={species}
-                                            key={`species_${index}_${species.name}`}
-                                            selected={
-                                                combinedQueryParams.species
-                                                    .id === species.id
-                                            }
-                                        >
-                                            <span>{species.name}</span>
-                                        </SpeciesItem>
-                                    )
-                                )}
-                        </SelectorList>
-                        <SelectorList title={'// Planets'}>
-                            {childQuery.data &&
-                                childQuery.data.Film.planets.map(
-                                    (planet, index) => (
-                                        <PlanetItem
-                                            planet={planet}
-                                            key={`planet_${index}_${planet.name}`}
-                                            selected={
-                                                combinedQueryParams.planet
-                                                    .id === planet.id
-                                            }
-                                        >
-                                            <span>{planet.name}</span>
-                                        </PlanetItem>
-                                    )
-                                )}
-                        </SelectorList>
-                    </LoadingElement>
-                )}
+                {showChildren && <SelectorListChildrenContainer />}
             </ListGroups>
         </Container>
     );

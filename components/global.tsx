@@ -36,7 +36,7 @@ STYLES
     :root {
       font-size: 12pt;
       @media (max-width: 425px) {
-          font-size: 11pt;
+          font-size: 10pt;
         }
     
       
