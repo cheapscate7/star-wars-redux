@@ -74,7 +74,7 @@ const CharacterListContainer: React.FC = () => {
                         loading={loading}
                         title={'// Characters'}
                     >
-                        <GotoButton onClick={executeScroll}>go to</GotoButton>
+                        <GotoButton onClick={executeScroll}>Results</GotoButton>
                         {data && data.allPersons.length > 0 ? (
                             data.allPersons.map((person, index) => (
                                 <CharacterItem
@@ -104,7 +104,7 @@ const GotoButton = styled.button`
     position: fixed;
     bottom: 0.5em;
     right: 0.5em;
-    padding: 0.75em 1em;
+    padding: 1em 1.5em;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: rgba(0, 28, 213, 0.8);
