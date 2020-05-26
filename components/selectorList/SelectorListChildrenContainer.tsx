@@ -8,8 +8,8 @@ import PlanetItem from './listItems/childItems/PlanetItem';
 import LoadingElement from '../LoadingElement';
 
 const FILM_CHILDREN = gql`
-    query getSpeciesAndPlanetsFromFilm($id: ID) {
-        Film(id: $id) {
+    query getSpeciesAndPlanetsFromFilm($filter: FilmFilter) {
+        allFilms(filter: $filter) {
             species {
                 id
                 name
@@ -22,6 +22,18 @@ const FILM_CHILDREN = gql`
     }
 `;
 
+const buildFilter = (filter) => {
+    //filter[key].id === null && delete filter[key]
+    Object.keys(filter).forEach((key) => {
+        if (key === 'id') {
+            filter['key'] === null && delete filter[key];
+        } else {
+            filter[key].id === null && delete filter[key];
+        }
+    });
+    return filter;
+};
+
 const SelectorListChildrenContainer = () => {
     const { searchState } = React.useContext(SearchContext);
     const { combinedQueryParams } = searchState;
@@ -30,7 +42,10 @@ const SelectorListChildrenContainer = () => {
         IFilmChildrenQueryVariables
     >(FILM_CHILDREN, {
         variables: {
-            id: combinedQueryParams.film.id || null,
+            filter: buildFilter({
+                id: combinedQueryParams.film.id || null,
+                species_some: { id: combinedQueryParams.species.id || null },
+            }),
         },
         skip: !combinedQueryParams.film.id,
     });
@@ -39,21 +54,24 @@ const SelectorListChildrenContainer = () => {
         <LoadingElement loading={childQuery.loading}>
             <SelectorList title={'// Species'}>
                 {childQuery.data &&
-                    childQuery.data.Film.species.map((species, index) => (
-                        <SpeciesItem
-                            species={species}
-                            key={`species_${index}_${species.name}`}
-                            selected={
-                                combinedQueryParams.species.id === species.id
-                            }
-                        >
-                            <span>{species.name}</span>
-                        </SpeciesItem>
-                    ))}
+                    childQuery.data.allFilms[0].species.map(
+                        (species, index) => (
+                            <SpeciesItem
+                                species={species}
+                                key={`species_${index}_${species.name}`}
+                                selected={
+                                    combinedQueryParams.species.id ===
+                                    species.id
+                                }
+                            >
+                                <span>{species.name}</span>
+                            </SpeciesItem>
+                        )
+                    )}
             </SelectorList>
             <SelectorList title={'// Planets'}>
                 {childQuery.data &&
-                    childQuery.data.Film.planets.map((planet, index) => (
+                    childQuery.data.allFilms[0].planets.map((planet, index) => (
                         <PlanetItem
                             planet={planet}
                             key={`planet_${index}_${planet.name}`}

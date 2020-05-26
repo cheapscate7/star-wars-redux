@@ -69,14 +69,19 @@ declare interface IGetCharactersQuery {
  * lists of species and planets rely on a film
  */
 declare interface IFilmChildrenQuery {
-    Film: {
+    allFilms: {
         species: ISpecies[];
         planets: IPlanet[];
-    };
+    }[];
 }
 
 declare interface IFilmChildrenQueryVariables {
-    id: string | null;
+    filter: {
+        id?: string | null;
+        species_some?: {
+            id: string;
+        };
+    };
 }
 
 declare interface IGetCharactersQueryVariables {
@@ -84,6 +89,7 @@ declare interface IGetCharactersQueryVariables {
         homeworld?: { id: string | null };
         films_some?: { id: string | null };
         species_some?: { id: string | null };
+        name_contains?: string;
     };
 }
 
