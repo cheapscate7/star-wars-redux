@@ -118,7 +118,7 @@ const GotoButton = styled.button`
     transition: background-color 0.3s;
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
-        color: ${theme.colors.foreground};
+        color: ${theme.colors.background};
         &:hover {
             background-color: ${theme.colors.highlight_1};
         }

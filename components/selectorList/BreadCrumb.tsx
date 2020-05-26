@@ -76,7 +76,7 @@ const Divider = styled.span`
     transition: all 0.3s linear;
     margin: auto 0.25em;
     ${({ theme }) => css`
-        color: ${theme.colors.foreground};
+        color: ${theme.colors.background};
     `};
     &:only-child,
     &:last-child {
@@ -86,7 +86,7 @@ const Divider = styled.span`
 
 const BreadCrumbItem = styled.div`
     ${({ theme }) => css`
-        color: ${theme.colors.foreground};
+        color: ${theme.colors.background};
     `};
     &:first-child:not(:only-child) {
         margin-right: 0.5em;
@@ -107,10 +107,15 @@ const ClearButton = styled.button`
     cursor: pointer;
     padding: 0.25em 0.75em;
     border-radius: 2px;
+    transition: 0.2s ease-in-out;
     ${({ theme }) => css`
         background-color: ${theme.colors.highlight_1};
-        color: ${theme.colors.foreground};
+        color: ${theme.colors.background};
         font-weight: ${theme.fontWeights.bold};
         font-size: ${theme.fontSizes.small};
+        &:hover {
+            background-color: ${rgba(theme.colors.highlight_1, 0.6)};
+            color: ${theme.colors.foreground};
+        }
     `};
 `;

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Title from './Title';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Head from 'next/head';
+import ThemeManagerContext from '../lib/withThemeManagerContext';
+import { themeManagerActions } from '../lib/withThemeManager';
 
 interface ILayoutProps {
     title: string;
@@ -9,6 +11,9 @@ interface ILayoutProps {
 }
 
 const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
+    const { themeManagerState, themeManagerDispatch } = useContext(
+        ThemeManagerContext
+    );
     return (
         <>
             <Head>
@@ -19,6 +24,16 @@ const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
                 <Title>
                     <h1>STARDB</h1>
                 </Title>
+                <SwitchThemeButton
+                    onClick={() =>
+                        themeManagerDispatch(themeManagerActions.toggleTheme())
+                    }
+                >
+                    Join The{' '}
+                    {themeManagerState.theme === 'light'
+                        ? 'Darkside'
+                        : 'Lightside'}
+                </SwitchThemeButton>
             </PageHeader>
             <PageContent>{children}</PageContent>
         </>
@@ -31,6 +46,9 @@ const PageHeader = styled.nav`
     color: white;
     padding: 2em 1em;
     border-bottom: 1px solid #777777;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 const PageContent = styled.main`
@@ -38,4 +56,21 @@ const PageContent = styled.main`
     margin: auto;
     //this is so the character list goto button doesnt cover up any of the last item of the list
     margin-bottom: 4em;
+`;
+
+const SwitchThemeButton = styled.button`
+    cursor: pointer;
+    padding: 1em 1.5em;
+    outline: none;
+    transition: 0.2s ease-in-out;
+    ${({ theme }) => css`
+        font-family: ${theme.fonts[1] || theme.fonts[0]};
+        color: ${theme.colors.foreground};
+        border: 1px solid ${theme.colors.foreground};
+        background-color: ${theme.colors.background};
+        &:focus,
+        &:hover {
+            border: 1px solid ${theme.colors.highlight_1};
+        }
+    `};
 `;
