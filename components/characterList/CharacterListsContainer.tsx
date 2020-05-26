@@ -56,16 +56,11 @@ const CharacterListContainer: React.FC = () => {
                                 <CharacterItem
                                     character={person}
                                     selected={false}
-                                    clickAction={() => {}}
                                     key={index}
                                 />
                             ))
                         ) : (
-                            <CharacterItem
-                                character={null}
-                                selected={false}
-                                clickAction={() => {}}
-                            >
+                            <CharacterItem character={null} selected={false}>
                                 No Results
                             </CharacterItem>
                         )}
