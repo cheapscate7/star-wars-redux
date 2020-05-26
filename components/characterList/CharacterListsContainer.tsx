@@ -7,6 +7,8 @@ import { useQuery } from '@apollo/react-hooks';
 import CharacterList from './CharacterList';
 import SearchContext from '../../lib/withSeachContext';
 import CharacterItem from './listItems/CharacterItem';
+import CharacterSearchContext from '../../lib/withCharacterSeachContext';
+import { rgba } from 'polished';
 
 const scrollToRef = (ref) => {
     window.scrollTo(0, ref.current.offsetTop);
@@ -42,6 +44,7 @@ const buildFilter = (filter) => {
 
 const CharacterListContainer: React.FC = () => {
     const { searchState } = React.useContext(SearchContext);
+    const { characterSearchState } = React.useContext(CharacterSearchContext);
     const { loading, data } = useQuery<
         IGetCharactersQuery,
         IGetCharactersQueryVariables
@@ -57,13 +60,16 @@ const CharacterListContainer: React.FC = () => {
                 species_some: {
                     id: searchState.combinedQueryParams.species.id || null,
                 },
+                name_contains: characterSearchState.searchTerm,
             }),
         },
         skip: !searchState.combinedQueryParams.film.id,
     });
 
     const characterListRef = useRef(null);
-    const executeScroll = () => scrollToRef(characterListRef);
+    const executeScroll = () => {
+        scrollToRef(characterListRef);
+    };
 
     return (
         <Container>
@@ -107,12 +113,14 @@ const GotoButton = styled.button`
     padding: 1em 1.5em;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: rgba(0, 28, 213, 0.8);
     color: white;
     border: 0;
-    object {
-        width: 0.5em;
-        height: 0.5em;
-        fill: white;
-    }
+    outline: none;
+    transition: background-color 0.3s;
+    ${({ theme }) => css`
+        background-color: ${rgba(theme.colors.highlight_1, 0.8)};
+        &:hover {
+            background-color: ${theme.colors.highlight_1};
+        }
+    `};
 `;

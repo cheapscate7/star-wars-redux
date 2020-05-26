@@ -1,5 +1,5 @@
 import React from 'react';
-// import BreadCrumb from './BreadCrumb';
+import BreadCrumb from './BreadCrumb';
 import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -10,10 +10,7 @@ import ListGroups from '../ListsShared/ListGroups';
 import SearchContext from '../..//lib/withSeachContext';
 import removeUndefined from '../../lib/helpers/arrays';
 import dynamic from 'next/dynamic';
-const SelectorListChildrenContainer = dynamic(
-    import('./SelectorListChildrenContainer')
-);
-const BreadCrumb = dynamic(import('./BreadCrumb'));
+import SelectorListChildrenContainer from './SelectorListChildrenContainer';
 
 const ALL_FILMS = gql`
     query getAllFilms {

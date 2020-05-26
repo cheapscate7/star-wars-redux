@@ -6,11 +6,14 @@ import CharacterListContainer from '../components/characterList/CharacterListsCo
 import withSearch from '../lib/withSearch';
 import React from 'react';
 import SearchContext from '../lib/withSeachContext';
+import CharacterSearchContext from '../lib/withCharacterSeachContext';
+import withCharacterSearch from '../lib/withCharacterSearch';
 
 type HomeProps = {};
 
 const Home: NextPage<HomeProps> = () => {
     const searchStore = withSearch();
+    const characterSearchStore = withCharacterSearch();
     return (
         <>
             <Layout
@@ -21,7 +24,11 @@ const Home: NextPage<HomeProps> = () => {
             >
                 <SearchContext.Provider value={searchStore}>
                     <SelectorListsContainer />
-                    <CharacterListContainer />
+                    <CharacterSearchContext.Provider
+                        value={characterSearchStore}
+                    >
+                        <CharacterListContainer />
+                    </CharacterSearchContext.Provider>
                 </SearchContext.Provider>
             </Layout>
         </>
