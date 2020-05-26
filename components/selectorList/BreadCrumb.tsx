@@ -105,5 +105,6 @@ const ClearButton = styled.button`
         background-color: ${theme.colors.background};
         color: ${theme.colors.foreground};
         font-weight: ${theme.fontWeights.bold};
+        font-size: ${theme.fontSizes.small};
     `};
 `;

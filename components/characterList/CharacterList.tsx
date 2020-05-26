@@ -2,9 +2,14 @@ import styled, { css } from 'styled-components';
 import React from 'react';
 import LoadingElement from '../LoadingElement';
 
-const CharacterList: React.FC<IListProps> = ({ title, loading, children }) => {
+const CharacterList: React.FC<IListProps> = ({
+    jumpTo,
+    title,
+    loading,
+    children,
+}) => {
     return (
-        <Container>
+        <Container ref={jumpTo}>
             {title && <h2>{title}</h2>}
             <List>
                 <LoadingElement loading={loading}>{children}</LoadingElement>
@@ -27,4 +32,7 @@ const List = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     column-gap: 0.5em;
     padding: 1em 2em;
+    @media (max-width: 425px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;

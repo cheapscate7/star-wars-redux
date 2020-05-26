@@ -102,6 +102,7 @@ declare interface IListItemProps {
 }
 
 declare interface IListProps {
+    jumpTo?: any;
     title?: string;
     loading?: boolean;
 }
