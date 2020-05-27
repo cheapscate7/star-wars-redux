@@ -8,6 +8,7 @@ import SearchContext from '../../lib/withSeachContext';
 import CharacterItem from './listItems/CharacterItem';
 import CharacterSearchContext from '../../lib/withCharacterSeachContext';
 import { rgba } from 'polished';
+import Arrow from '../icons/Arrow';
 
 // Scroll the window to a passed ref
 const scrollToRef = (ref) => {
@@ -90,7 +91,9 @@ const CharacterListContainer: React.FC = () => {
                     loading={loading}
                     title={'// Characters'}
                 >
-                    <GotoButton onClick={executeScroll}>Results</GotoButton>
+                    <GotoButton onClick={executeScroll}>
+                        <Arrow direction={'bottom'} match={'background'} />
+                    </GotoButton>
                     {data && data.allPersons.length > 0 ? (
                         data.allPersons.map((person, index) => (
                             <CharacterItem

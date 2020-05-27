@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import LoadingElement from '../LoadingElement';
+import LoadingElement from '../loading/LoadingElement';
 
 /**
  * for displaying a collection of list nodes eg: <FilmItem>

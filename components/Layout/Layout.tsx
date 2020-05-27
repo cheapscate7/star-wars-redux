@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import Title from './Title';
+import Title from '../titles/Title';
 import styled, { css } from 'styled-components';
 import Head from 'next/head';
-import ThemeManagerContext from '../lib/withThemeManagerContext';
-import { themeManagerActions } from '../lib/withThemeManager';
+import ThemeManagerContext from '../../lib/withThemeManagerContext';
+import { themeManagerActions } from '../../lib/withThemeManager';
 
 interface ILayoutProps {
     title: string;

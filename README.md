@@ -6,7 +6,7 @@
 
 An example of using [swapi.graph.cool](https://swapi.graph.cool/) to call a list of Star Wars characters based on film, species, and planet.
 
-##Usage
+## Usage
 
 -   Select a film
     -   Generates a list of species and a list of planets
@@ -18,7 +18,8 @@ An example of using [swapi.graph.cool](https://swapi.graph.cool/) to call a list
     -   Your selection is saved automatically for if you revisit the website
 -   clicking a selected item unselects it
 
-#Install
+# Install
+
 Run in dev mode:  
 `npm run dev` or `yarn dev`
 

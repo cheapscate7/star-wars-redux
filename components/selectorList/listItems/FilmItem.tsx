@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { searchActions } from '../../../lib/withSearch';
 import AddOptionButton from './AddOptionButton';
 import SearchContext from '../../../lib/withSeachContext';
+import Arrow from '../../icons/Arrow';
 
 interface FilmItemProps extends IListItemProps {
     film: IFilm;
@@ -30,7 +31,7 @@ const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
         <Item className={selected && 'active'}>
             {children}
             <AddOptionButton onClick={handleClick}>
-                <img alt={'next option'} src={'/arrow-right.svg'} />
+                <Arrow direction={'right'} match={'foreground'} />
             </AddOptionButton>
         </Item>
     );

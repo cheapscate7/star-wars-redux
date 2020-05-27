@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/Layout';
 import { withApollo } from '../lib/apollo';
 import SelectorListsContainer from '../components/selectorList/SelectorListsContainer';
 import CharacterListContainer from '../components/characterList/CharacterListsContainer';

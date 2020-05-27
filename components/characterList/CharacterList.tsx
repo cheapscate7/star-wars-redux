@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
-import LoadingElement from '../LoadingElement';
+import LoadingElement from '../loading/LoadingElement';
 import CharacterSearchContext from '../../lib/withCharacterSeachContext';
 import { characterSearchActions } from '../../lib/withCharacterSearch';
 import { DebounceInput } from 'react-debounce-input';

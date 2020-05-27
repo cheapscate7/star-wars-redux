@@ -5,7 +5,7 @@ import SearchContext from '../../lib/withSeachContext';
 import SelectorList from './SelectorList';
 import SpeciesItem from './listItems/childItems/SpeciesItem';
 import PlanetItem from './listItems/childItems/PlanetItem';
-import LoadingElement from '../LoadingElement';
+import LoadingElement from '../loading/LoadingElement';
 
 const FILM_CHILDREN = gql`
     query getSpeciesAndPlanetsFromFilm($id: ID) {
