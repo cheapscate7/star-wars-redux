@@ -25,3 +25,7 @@ Run in dev mode:
 
 Build:  
 `npm run build` or `yarn build`
+
+## Other
+
+You can also go to `/designs` to see some of my ideas when I first started the project
