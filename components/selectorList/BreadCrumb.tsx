@@ -48,6 +48,7 @@ const BreadCrumbContainer = styled.div`
     min-height: 1em;
     width: 0;
     transition: width 0.3s linear;
+    transition: background-color 0.2s ease-in-out;
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
         color: ${theme.colors.background};
@@ -72,6 +73,9 @@ const BreadCrumbContainer = styled.div`
 
 export default BreadCrumb;
 
+/**
+ * Separator for each item of the breadcrumb
+ */
 const Divider = styled.span`
     transition: all 0.3s linear;
     margin: auto 0.25em;

@@ -24,6 +24,7 @@ FONTS
     }
     /**
       Montserrat
+      a more 'normal' looking sans-serif font
      */
     @font-face {
         font-family: 'Montserrat';
@@ -44,14 +45,13 @@ STYLES
     ::selection {
       ${({ theme }) => css`
           background: ${theme.colors.highlight_1_contrast};
-      `};; /* WebKit/Blink Browsers */
+      `};
     }
     
     body {
         border: 0;
         margin: 0;
         transition: background-color 0.2s ease-in-out;
-        transition-delay: 0.2s;
         ${({ theme }) => css`
             background-color: ${theme.colors.background};
         `};

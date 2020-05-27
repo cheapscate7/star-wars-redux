@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 
+/**
+ * a grid for putting multiple lists in a row
+ */
 const ListGroups = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

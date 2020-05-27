@@ -5,6 +5,15 @@ import CharacterSearchContext from '../../lib/withCharacterSeachContext';
 import { characterSearchActions } from '../../lib/withCharacterSearch';
 import { DebounceInput } from 'react-debounce-input';
 
+/**
+ * List of Characters
+ * Renders a list of <CharacterItem>
+ * @param jumpTo    a ref used for jumping to the list if there are any results
+ * @param title     optional header for the list
+ * @param loading   type:boolean    if the query data is still loading
+ * @param children  Document node of <CharacterItem>
+ * @constructor
+ */
 const CharacterList: React.FC<IListProps> = ({
     jumpTo,
     title,
@@ -39,28 +48,20 @@ const CharacterList: React.FC<IListProps> = ({
 
 export default CharacterList;
 
+/**
+ * holds the List as well as an optional title
+ */
 const Container = styled.section`
     padding: 0 1em;
     ${({ theme }) => css`
         font-family: ${theme.fonts[2] || theme.fonts[0]};
         color: ${theme.colors.foreground};
-        @keyframes flash-animation {
-            0% {
-                background-color: ${theme.colors.foreground};
-            }
-            5% {
-                background-color: transparent;
-            }
-        }
     `};
-
-    &:focus {
-        animation-name: flash-animation;
-        animation-duration: 1s;
-        animation-iteration-count: 1;
-    }
 `;
 
+/**
+ * Renders a list of <CharacterItem> in a grid
+ */
 const List = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -72,6 +73,9 @@ const List = styled.div`
     }
 `;
 
+/**
+ * A search box for filtering Character results
+ */
 const Search = styled.input`
     background-color: transparent;
     padding: 0.75em 1.2em;

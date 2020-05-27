@@ -31,6 +31,9 @@ const SelectorList: React.FC<IListProps> = ({ title, loading, children }) => {
 
 export default SelectorList;
 
+/**
+ * container for the title, hide button, and list
+ */
 const Container = styled.section`
     padding: 0 1em;
     ${({ theme }) => css`
@@ -39,6 +42,9 @@ const Container = styled.section`
     `};
 `;
 
+/**
+ * renders a list of selectors eg <FilmItem>
+ */
 const List = styled.ul`
     list-style-type: none;
     padding-left: 0;

@@ -1,6 +1,9 @@
 import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
 
+/**
+ * shared styles for <PlanetItem> and <speciesItem>
+ */
 const Item = styled.li`
     padding: 0.5em;
     transition: 0.2s ease;
@@ -11,9 +14,7 @@ const Item = styled.li`
             border-right: 0.25em double ${theme.colors.foreground};
             border-left: 0.25em double ${theme.colors.foreground};
         }
-         {
-            /*This gives the box the bold corners*/
-        }
+        //This gives the box the bold corners
         background: linear-gradient(
                     to right,
                     ${theme.colors.highlight_1} 2px,
@@ -66,6 +67,7 @@ const Item = styled.li`
         background-size: 10px 10px;
         background-color: ${rgba(theme.colors.highlight_1, 0.02)};
         box-shadow: 0 0 7px ${rgba(theme.colors.highlight_1, 0.2)};
+        // the whole list item is rendered inside a button to make the whole thing clickable
         button {
             color: ${theme.colors.highlight_1};
             font-family: ${theme.fonts[1] || theme.fonts[0]};

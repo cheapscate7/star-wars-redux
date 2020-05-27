@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
-import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -10,8 +9,13 @@ import CharacterItem from './listItems/CharacterItem';
 import CharacterSearchContext from '../../lib/withCharacterSeachContext';
 import { rgba } from 'polished';
 
+// Scroll the window to a passed ref
 const scrollToRef = (ref) => {
-    window.scrollTo(0, ref.current.offsetTop);
+    if (ref) {
+        window.scrollTo(0, ref.current.offsetTop);
+    } else {
+        throw new Error('No ref passed to scrollToRef()');
+    }
 };
 
 const GET_CHARACTERS = gql`
@@ -42,9 +46,15 @@ const buildFilter = (filter) => {
     return filter;
 };
 
+/**
+ * Handles Querying the api for characters
+ * Must be inside a SearchContext provider
+ * @constructor
+ */
 const CharacterListContainer: React.FC = () => {
-    const { searchState } = React.useContext(SearchContext);
-    const { characterSearchState } = React.useContext(CharacterSearchContext);
+    const { searchState } = React.useContext(SearchContext); //selected Film, Species, Planet
+    const { characterSearchState } = React.useContext(CharacterSearchContext); //Search query eg. Luke Skywalker
+
     const { loading, data } = useQuery<
         IGetCharactersQuery,
         IGetCharactersQueryVariables
@@ -66,45 +76,47 @@ const CharacterListContainer: React.FC = () => {
         skip: !searchState.combinedQueryParams.film.id,
     });
 
+    //allows a button to scroll to character results
     const characterListRef = useRef(null);
     const executeScroll = () => {
         scrollToRef(characterListRef);
     };
 
     return (
-        <Container>
-            <ListGroups>
-                {searchState.combinedQueryParams.film.id && (
-                    <CharacterList
-                        jumpTo={characterListRef}
-                        loading={loading}
-                        title={'// Characters'}
-                    >
-                        <GotoButton onClick={executeScroll}>Results</GotoButton>
-                        {data && data.allPersons.length > 0 ? (
-                            data.allPersons.map((person, index) => (
-                                <CharacterItem
-                                    character={person}
-                                    selected={false}
-                                    key={`character_item_${index}_${
-                                        person.name && person.name
-                                    }`}
-                                />
-                            ))
-                        ) : (
-                            <CharacterItem character={null} selected={false}>
-                                No Results
-                            </CharacterItem>
-                        )}
-                    </CharacterList>
-                )}
-            </ListGroups>
-        </Container>
+        <ListGroups>
+            {searchState.combinedQueryParams.film.id && (
+                <CharacterList
+                    jumpTo={characterListRef}
+                    loading={loading}
+                    title={'// Characters'}
+                >
+                    <GotoButton onClick={executeScroll}>Results</GotoButton>
+                    {data && data.allPersons.length > 0 ? (
+                        data.allPersons.map((person, index) => (
+                            <CharacterItem
+                                character={person}
+                                selected={false}
+                                key={`character_item_${index}_${
+                                    person.name && person.name
+                                }`}
+                            />
+                        ))
+                    ) : (
+                        <CharacterItem character={null} selected={false}>
+                            No Results
+                        </CharacterItem>
+                    )}
+                </CharacterList>
+            )}
+        </ListGroups>
     );
 };
 
 export default CharacterListContainer;
 
+/**
+ * a fixed button to jump to the character List
+ */
 const GotoButton = styled.button`
     cursor: pointer;
     position: fixed;

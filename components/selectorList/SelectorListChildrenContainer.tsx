@@ -22,9 +22,15 @@ const FILM_CHILDREN = gql`
     }
 `;
 
+/**
+ * queries Species and planets based on the selected film id
+ * must be placed inside a SearchContext provider
+ * @constructor
+ */
 const SelectorListChildrenContainer = () => {
     const { searchState } = React.useContext(SearchContext);
     const { combinedQueryParams } = searchState;
+
     const childQuery = useQuery<
         IFilmChildrenQuery,
         IFilmChildrenQueryVariables
@@ -37,6 +43,7 @@ const SelectorListChildrenContainer = () => {
 
     return (
         <LoadingElement loading={childQuery.loading}>
+            {/*SPECIES LIST*/}
             <SelectorList title={'// Species'}>
                 {childQuery.data &&
                     childQuery.data.Film.species.map((species, index) => (
@@ -51,6 +58,8 @@ const SelectorListChildrenContainer = () => {
                         </SpeciesItem>
                     ))}
             </SelectorList>
+
+            {/*PLANET LIST*/}
             <SelectorList title={'// Planets'}>
                 {childQuery.data &&
                     childQuery.data.Film.planets.map((planet, index) => (

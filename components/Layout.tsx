@@ -10,10 +10,18 @@ interface ILayoutProps {
     description: string;
 }
 
+/**
+ * Controls the layout of the page content in relation to the page header
+ * @param title     extend the <Head> title
+ * @param description   extend the meta description
+ * @param children      page content
+ * @constructor
+ */
 const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
     const { themeManagerState, themeManagerDispatch } = useContext(
         ThemeManagerContext
     );
+
     return (
         <>
             <Head>

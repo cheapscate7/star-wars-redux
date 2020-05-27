@@ -58,13 +58,6 @@ declare interface IAllFilmsQuery {
 }
 
 /**
- * IGetCharactersQuery
- */
-declare interface IGetCharactersQuery {
-    allPersons: ICharacter[];
-}
-
-/**
  * IFilmChildrenQuery
  * lists of species and planets rely on a film
  */
@@ -77,6 +70,13 @@ declare interface IFilmChildrenQuery {
 
 declare interface IFilmChildrenQueryVariables {
     id: string | null;
+}
+
+/**
+ * IGetCharactersQuery
+ */
+declare interface IGetCharactersQuery {
+    allPersons: ICharacter[];
 }
 
 declare interface IGetCharactersQueryVariables {
@@ -101,6 +101,10 @@ declare interface IListItemProps {
     clickAction?: Function;
 }
 
+/**
+ * IListProps
+ * eg. CharacterList
+ */
 declare interface IListProps {
     jumpTo?: any;
     title?: string;
@@ -153,5 +157,7 @@ declare interface Theme {
     };
     shadows?: string[];
     fonts: string[];
+    //an icon for use in things like loading icons
+    //I use it to have a rebel alliance symbol for the light theme and an Empire symbol for dark
     iconDecor: string;
 }

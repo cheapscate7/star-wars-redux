@@ -1,5 +1,3 @@
-import AddOptionButton from '../AddOptionButton';
-import styled, { css } from 'styled-components';
 import { searchActions } from '../../../../lib/withSearch';
 import Item from './Item';
 import React from 'react';

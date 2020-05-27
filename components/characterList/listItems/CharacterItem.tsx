@@ -5,6 +5,14 @@ interface CharacterItemProps extends IListItemProps {
     character: ICharacter;
 }
 
+/**
+ * Contains a single character
+ * Is also used to show if there are no characters
+ * @param character type:ICharacter the character to display
+ * @param selected  type:boolean    if the item is selected
+ * @param children  used to display a message if there are no characters
+ * @constructor
+ */
 const CharacterItem: React.FC<CharacterItemProps> = ({
     character,
     selected,
@@ -37,6 +45,9 @@ const CharacterItem: React.FC<CharacterItemProps> = ({
 
 export default CharacterItem;
 
+/**
+ * container for the individual character
+ */
 const Item = styled.div`
     display: flex;
     justify-content: center;

@@ -12,7 +12,7 @@ interface FilmItemProps extends IListItemProps {
  * renders an individual film's data in a <List> component
  * @param film  type: IFilm     the film data to be rendered
  * @param selected  type: boolean   triggers special css if film is selected
- * @param children  type: DocumentNode
+ * @param children  type: ReactNode
  * @constructor
  */
 const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
@@ -38,6 +38,9 @@ const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
 
 export default FilmItem;
 
+/**
+ * Container for each FilmItem
+ */
 const Item = styled.li`
     display: flex;
     justify-content: space-between;
@@ -53,6 +56,7 @@ const Item = styled.li`
         }
     `};
 
+    //cuts out the top left corner
     &::before {
         content: '';
         position: absolute;
@@ -70,6 +74,7 @@ const Item = styled.li`
         `};
     }
 
+    //the wedge in the bottom right corner
     &::after {
         content: '';
         display: block;

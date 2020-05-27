@@ -4,12 +4,10 @@ import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
-import LoadingElement from '../LoadingElement';
 import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
 import SearchContext from '../..//lib/withSeachContext';
 import removeUndefined from '../../lib/helpers/arrays';
-import dynamic from 'next/dynamic';
 import SelectorListChildrenContainer from './SelectorListChildrenContainer';
 
 const ALL_FILMS = gql`
@@ -22,9 +20,7 @@ const ALL_FILMS = gql`
 `;
 
 /**
- * A grid for placing <SelectorList> items in based on CSS grids
- * one List acts as a master, selecting a value from the master list causes all child lists to be render
- * also has a breadcrumb
+ * Queries the master list (films) and controls the visibility of the lists that hold a relation to it
  * @constructor
  */
 const SelectorListsContainer: React.FC = () => {
@@ -43,6 +39,7 @@ const SelectorListsContainer: React.FC = () => {
             />
 
             <ListGroups>
+                {/*FILM LIST*/}
                 <SelectorList loading={masterQuery.loading} title={'// Film'}>
                     {masterQuery.data &&
                         masterQuery.data.allFilms.map((film, index) => (
@@ -57,6 +54,7 @@ const SelectorListsContainer: React.FC = () => {
                             </FilmItem>
                         ))}
                 </SelectorList>
+
                 {combinedQueryParams.film.id && (
                     <SelectorListChildrenContainer />
                 )}
