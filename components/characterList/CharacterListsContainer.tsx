@@ -121,11 +121,12 @@ export default CharacterListContainer;
  * a fixed button to jump to the character List
  */
 const GotoButton = styled.button`
+    display: flex;
     cursor: pointer;
     position: fixed;
     bottom: 0.5em;
     right: 0.5em;
-    padding: 1em 1.5em;
+    padding: 1em 1.25em;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 0;
