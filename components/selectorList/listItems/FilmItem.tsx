@@ -30,7 +30,10 @@ const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
     return (
         <Item className={selected && 'active'}>
             {children}
-            <AddOptionButton onClick={handleClick}>
+            <AddOptionButton
+                aria-label={'Add ' + film.title}
+                onClick={handleClick}
+            >
                 <Arrow direction={'right'} match={'foreground'} />
             </AddOptionButton>
         </Item>

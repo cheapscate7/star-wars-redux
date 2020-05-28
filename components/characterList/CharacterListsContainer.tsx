@@ -91,7 +91,10 @@ const CharacterListContainer: React.FC = () => {
                     loading={loading}
                     title={'// Characters'}
                 >
-                    <GotoButton onClick={executeScroll}>
+                    <GotoButton
+                        aria-label={'Go to Characters'}
+                        onClick={executeScroll}
+                    >
                         <Arrow
                             direction={'bottom'}
                             match={'coloured_button_foreground'}

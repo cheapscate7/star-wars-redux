@@ -32,7 +32,12 @@ const BreadCrumb: React.FC<IBreadCrumbProps> = ({ items }) => {
                     )
             )}
             {items.length > 0 && (
-                <ClearButton onClick={handleClear}>x</ClearButton>
+                <ClearButton
+                    aria-label={'Clear all selections'}
+                    onClick={handleClear}
+                >
+                    x
+                </ClearButton>
             )}
         </BreadCrumbContainer>
     );
