@@ -49,6 +49,15 @@ declare interface ICharacter {
 /**
  * GraphQL query types
  */
+
+/**
+ * Generic query result
+ * for passing the result of a query as props to a component
+ */
+declare interface IQueryResult {
+    loading: boolean;
+    data: IAllFilmsQuery;
+}
 /**
  * IAllFilmsQuery
  * the master list that all other lists rely on contains the films of the franchise

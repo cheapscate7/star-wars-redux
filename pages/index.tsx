@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import apolloClient from '../apolloClient';
 import Layout from '../components/Layout/Layout';
 import { withApollo } from '../lib/apollo';
 import SelectorListsContainer from '../components/selectorList/SelectorListsContainer';
@@ -8,10 +9,22 @@ import React from 'react';
 import SearchContext from '../lib/withSeachContext';
 import CharacterSearchContext from '../lib/withCharacterSeachContext';
 import withCharacterSearch from '../lib/withCharacterSearch';
+import gql from 'graphql-tag';
 
-type HomeProps = {};
+const ALL_FILMS = gql`
+    query getAllFilms {
+        allFilms {
+            id
+            title
+        }
+    }
+`;
 
-const Home: NextPage<HomeProps> = () => {
+interface IHomeProps {
+    masterQuery: Partial<IQueryResult>;
+}
+
+const Home: NextPage<IHomeProps> = ({ masterQuery }) => {
     const searchStore = withSearch();
     const characterSearchStore = withCharacterSearch();
     return (
@@ -23,7 +36,7 @@ const Home: NextPage<HomeProps> = () => {
                 }
             >
                 <SearchContext.Provider value={searchStore}>
-                    <SelectorListsContainer />
+                    <SelectorListsContainer masterQuery={masterQuery} />
                     <CharacterSearchContext.Provider
                         value={characterSearchStore}
                     >
@@ -33,6 +46,14 @@ const Home: NextPage<HomeProps> = () => {
             </Layout>
         </>
     );
+};
+
+Home.getInitialProps = async (ctx) => {
+    const client = await apolloClient(ctx);
+    const masterQuery = await client.query<IAllFilmsQuery>({
+        query: ALL_FILMS,
+    });
+    return { masterQuery };
 };
 
 export default withApollo({ ssr: true })(Home);

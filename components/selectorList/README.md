@@ -8,7 +8,7 @@ A selector is a filter for the data in a `CharacterList`
 
 -   `SelectorListsContainer`
     -   Hold all `SelectorList`s (both master and children)
-    -   Queries API for the data for the master list
+    -   Receives data for the master list
     -   Controls display of `BreadCrumb`
 -   `SelectorList`
     -   a `<section>` that holds a list of selectors and a title for the list

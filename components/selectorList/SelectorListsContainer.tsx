@@ -1,8 +1,6 @@
 import React from 'react';
 import BreadCrumb from './BreadCrumb';
 import SelectorList from './SelectorList';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import FilmItem from './listItems/FilmItem';
 import Container from '../ListsShared/Container';
 import ListGroups from '../ListsShared/ListGroups';
@@ -10,21 +8,17 @@ import SearchContext from '../..//lib/withSeachContext';
 import removeUndefined from '../../lib/helpers/arrays';
 import SelectorListChildrenContainer from './SelectorListChildrenContainer';
 
-const ALL_FILMS = gql`
-    query getAllFilms {
-        allFilms {
-            id
-            title
-        }
-    }
-`;
-
+interface ISelectorListsContainerProps {
+    masterQuery: Partial<IQueryResult>;
+}
 /**
- * Queries the master list (films) and controls the visibility of the lists that hold a relation to it
+ * Receives a master list (films) and controls the visibility of the lists that hold a relation to it
+ * @masterQuery type:Partial<IQueryResult> the result from a query on the master list
  * @constructor
  */
-const SelectorListsContainer: React.FC = () => {
-    const masterQuery = useQuery<IAllFilmsQuery>(ALL_FILMS);
+const SelectorListsContainer: React.FC<ISelectorListsContainerProps> = ({
+    masterQuery,
+}) => {
     const { searchState } = React.useContext(SearchContext);
     const { combinedQueryParams } = searchState;
 
