@@ -12,9 +12,6 @@ A selector is a filter for the data in a `CharacterList`
     -   Controls display of `BreadCrumb`
 -   `SelectorList`
     -   a `<section>` that holds a list of selectors and a title for the list
--   `SelectorListChildrenContainer`
-    -   A container for multiple Children selector lists
-    -   Queries API for the data for the children lists
 -   `BreadCrumb`
     -   Displays a Breadcrumb of all the selected items
     -   Can Clear selected items

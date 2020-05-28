@@ -3,19 +3,22 @@ import React from 'react';
 import { rgba } from 'polished';
 import SearchContext from '../../lib/withSeachContext';
 import { searchActions } from '../../lib/withSearch';
-
-interface IBreadCrumbProps {
-    items: string[];
-}
+import removeUndefined from '../../lib/helpers/arrays';
 
 /**
- * A breadcrumb for displaying selected Film | Species | Planet
+ * A breadcrumb for displaying selected Film | Species | Planet etc
  * this breadcrumb is filled with the highlight_1 colour
- * @param children  pass headers containing the information in the breadcrumb and the placement of dividers eg <span>Film</span> | <span>Planet</span>
  * @constructor
  */
-const BreadCrumb: React.FC<IBreadCrumbProps> = ({ items }) => {
-    const { searchDispatch } = React.useContext(SearchContext);
+const BreadCrumb: React.FC = () => {
+    const { searchState, searchDispatch } = React.useContext(SearchContext);
+    const { combinedQueryParams } = searchState;
+
+    const items = removeUndefined([
+        combinedQueryParams.film.title,
+        combinedQueryParams.species.name,
+        combinedQueryParams.planet.name,
+    ]);
 
     const handleClear = () => {
         searchDispatch(searchActions.reset());
@@ -114,7 +117,7 @@ const BreadCrumbItem = styled.div`
 const ClearButton = styled.button`
     border: 0;
     cursor: pointer;
-    padding: 0.25em 0.75em;
+    padding: 0.2em 0.7em;
     border-radius: 2px;
     transition: 0.2s ease-in-out;
     ${({ theme }) => css`

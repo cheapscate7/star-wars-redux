@@ -51,34 +51,33 @@ declare interface ICharacter {
  */
 
 /**
- * Generic query result
- * for passing the result of a query as props to a component
- */
-declare interface IQueryResult {
-    loading: boolean;
-    data: IAllFilmsQuery;
-}
-/**
  * IAllFilmsQuery
  * the master list that all other lists rely on contains the films of the franchise
  */
-declare interface IAllFilmsQuery {
+declare interface IGetFilmsQuery {
     allFilms: IFilm[];
 }
 
 /**
- * IFilmChildrenQuery
- * lists of species and planets rely on a film
+ * IGetPlanetsQuery
  */
-declare interface IFilmChildrenQuery {
-    Film: {
-        species: ISpecies[];
-        planets: IPlanet[];
+declare interface IGetPlanetsQuery {
+    allPlanets: IPlanet[];
+}
+
+declare interface IGetPlanetsOrSpeciesQueryVariables {
+    filter: {
+        films_some: {
+            id: string | null;
+        };
     };
 }
 
-declare interface IFilmChildrenQueryVariables {
-    id: string | null;
+/**
+ * IGetSpeciesQuery
+ */
+declare interface IGetSpeciesQuery {
+    allSpecies: ISpecies[];
 }
 
 /**

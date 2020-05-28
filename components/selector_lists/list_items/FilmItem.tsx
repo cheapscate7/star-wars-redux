@@ -120,19 +120,19 @@ const Item = styled.li`
 
     &:first-child {
         margin-bottom: 0.5em;
-        &.active {
+        &.active, &:focus {
           margin-left: 1em;
         }
     }
     &:last-child {
         margin-top: 0.5em;
-        &.active {
+        &.active, &:focus {
           margin-left: 1em;
         }
     }
     &:not(:first-child):not(:last-child) {
         margin: 0.5em auto;
-        &.active {
+        &.active, &:focus {
           margin-left: 1em;
         }
     }

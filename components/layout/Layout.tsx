@@ -57,6 +57,17 @@ const PageHeader = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 320px) {
+        flex-direction: column;
+        justify-content: space-between;
+        > *:first-child {
+            margin-bottom: 0.5em;
+        }
+        > *:last-child {
+            margin-top: 0.5em;
+        }
+    }
 `;
 
 const PageContent = styled.main`

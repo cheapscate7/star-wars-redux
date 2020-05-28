@@ -9,6 +9,9 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 2em auto;
+    @media (max-width: 425px) {
+        margin: 1em auto;
+    }
 `;
 
 export default Container;

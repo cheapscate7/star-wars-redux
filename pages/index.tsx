@@ -1,15 +1,18 @@
 import { NextPage } from 'next';
 import apolloClient from '../apolloClient';
-import Layout from '../components/Layout/Layout';
+import Layout from '../components/layout/Layout';
 import { withApollo } from '../lib/apollo';
-import SelectorListsContainer from '../components/selectorList/SelectorListsContainer';
-import CharacterListContainer from '../components/characterList/CharacterListsContainer';
+import SelectorListsContainer from '../components/selector_lists/SelectorListsContainer';
+import CharacterListContainer from '../components/character_list/CharacterListsContainer';
 import withSearch from '../lib/withSearch';
 import React from 'react';
 import SearchContext from '../lib/withSeachContext';
 import CharacterSearchContext from '../lib/withCharacterSeachContext';
 import withCharacterSearch from '../lib/withCharacterSearch';
 import gql from 'graphql-tag';
+import FilmList from '../components/selector_lists/lists/FilmList';
+import SpeciesList from '../components/selector_lists/lists/SpeciesList';
+import PlanetsList from '../components/selector_lists/lists/PlanetsList';
 
 const ALL_FILMS = gql`
     query getAllFilms {
@@ -21,10 +24,10 @@ const ALL_FILMS = gql`
 `;
 
 interface IHomeProps {
-    masterQuery: Partial<IQueryResult>;
+    masterData: IGetFilmsQuery;
 }
 
-const Home: NextPage<IHomeProps> = ({ masterQuery }) => {
+const Home: NextPage<IHomeProps> = ({ masterData }) => {
     const searchStore = withSearch();
     const characterSearchStore = withCharacterSearch();
     return (
@@ -36,10 +39,19 @@ const Home: NextPage<IHomeProps> = ({ masterQuery }) => {
                 }
             >
                 <SearchContext.Provider value={searchStore}>
-                    <SelectorListsContainer masterQuery={masterQuery} />
+                    {/*SELECTORS*/}
+                    <SelectorListsContainer
+                        master={'films'}
+                        childLists={['species', 'planets']}
+                    >
+                        <FilmList key={'films'} data={masterData} />
+                        <SpeciesList key={'species'} />
+                        <PlanetsList key={'planets'} />
+                    </SelectorListsContainer>
                     <CharacterSearchContext.Provider
                         value={characterSearchStore}
                     >
+                        {/*CHARACTERS*/}
                         <CharacterListContainer />
                     </CharacterSearchContext.Provider>
                 </SearchContext.Provider>
@@ -50,10 +62,10 @@ const Home: NextPage<IHomeProps> = ({ masterQuery }) => {
 
 Home.getInitialProps = async (ctx) => {
     const client = await apolloClient(ctx);
-    const masterQuery = await client.query<IAllFilmsQuery>({
+    const masterQuery = await client.query<IGetFilmsQuery>({
         query: ALL_FILMS,
     });
-    return { masterQuery };
+    return { masterData: masterQuery.data };
 };
 
 export default withApollo({ ssr: true })(Home);

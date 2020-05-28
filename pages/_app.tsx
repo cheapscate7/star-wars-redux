@@ -2,7 +2,7 @@ import * as React from 'react';
 import Head from 'next/head';
 import LightTheme from '../themes/Light';
 import DarkTheme from '../themes/Dark';
-import GlobalStyle from '../components/globalStyles/global';
+import GlobalStyle from '../components/global_styles/global';
 import { ThemeProvider } from 'styled-components';
 import withThemeManager, { themeManagerActions } from '../lib/withThemeManager';
 import ThemeManagerContext from '../lib/withThemeManagerContext';
