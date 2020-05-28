@@ -34,7 +34,11 @@ const FilmItem: React.FC<FilmItemProps> = ({ film, selected, children }) => {
                 aria-label={'Add ' + film.title}
                 onClick={handleClick}
             >
-                <Arrow direction={'right'} match={'foreground'} />
+                <Arrow
+                    id={`add_${film.title}_${film.id}`}
+                    direction={'right'}
+                    match={'foreground'}
+                />
             </AddOptionButton>
         </Item>
     );

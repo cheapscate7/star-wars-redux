@@ -4,14 +4,22 @@ import styled, { css } from 'styled-components';
 interface IArrowProps {
     direction: string;
     match: string;
+    id?: string;
 }
 
-const Arrow: React.FC<IArrowProps> = ({ direction, match }) => {
+/**
+ * An SVG arrow
+ * @param direction left | right | top | bottom     the direction the arrow points
+ * @param match     a key to a color stored in the current theme to fill the svg path
+ * @param id    a unique id for the svg
+ * @constructor
+ */
+const Arrow: React.FC<IArrowProps> = ({ direction, match, id }) => {
     return (
         <SVG
             direction={direction}
             version="1.1"
-            id="Capa_1"
+            id={id || `arrow_${direction}`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 477.175 477.175"
         >
