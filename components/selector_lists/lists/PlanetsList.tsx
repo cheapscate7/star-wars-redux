@@ -1,18 +1,9 @@
 import PlanetItem from '../list_items/childItems/PlanetItem';
 import SelectorList from './SelectorList';
 import React from 'react';
-import gql from 'graphql-tag';
 import SearchContext from '../../../lib/withSeachContext';
 import { useQuery } from '@apollo/react-hooks';
-
-const GET_PLANETS = gql`
-    query getPlanets($filter: PlanetFilter) {
-        allPlanets(filter: $filter) {
-            id
-            name
-        }
-    }
-`;
+import { GET_PLANETS } from '../../../lib/queries/starwarsQueries';
 
 const PlanetsList: React.FC = () => {
     const { searchState } = React.useContext(SearchContext);

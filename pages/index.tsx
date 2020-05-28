@@ -9,19 +9,10 @@ import React from 'react';
 import SearchContext from '../lib/withSeachContext';
 import CharacterSearchContext from '../lib/withCharacterSeachContext';
 import withCharacterSearch from '../lib/withCharacterSearch';
-import gql from 'graphql-tag';
 import FilmList from '../components/selector_lists/lists/FilmList';
 import SpeciesList from '../components/selector_lists/lists/SpeciesList';
 import PlanetsList from '../components/selector_lists/lists/PlanetsList';
-
-const ALL_FILMS = gql`
-    query getAllFilms {
-        allFilms {
-            id
-            title
-        }
-    }
-`;
+import { ALL_FILMS } from '../lib/queries/starwarsQueries';
 
 interface IHomeProps {
     masterData: IGetFilmsQuery;
@@ -30,6 +21,7 @@ interface IHomeProps {
 const Home: NextPage<IHomeProps> = ({ masterData }) => {
     const searchStore = withSearch();
     const characterSearchStore = withCharacterSearch();
+
     return (
         <>
             <Layout

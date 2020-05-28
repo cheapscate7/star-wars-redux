@@ -3,16 +3,7 @@ import SpeciesItem from '../list_items/childItems/SpeciesItem';
 import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
 import SearchContext from '../../../lib/withSeachContext';
-import gql from 'graphql-tag';
-
-const GET_SPECIES = gql`
-    query getSpecies($filter: SpeciesFilter) {
-        allSpecies(filter: $filter) {
-            id
-            name
-        }
-    }
-`;
+import { GET_SPECIES } from '../../../lib/queries/starwarsQueries';
 
 const SpeciesList: React.FC = () => {
     const { searchState } = React.useContext(SearchContext);

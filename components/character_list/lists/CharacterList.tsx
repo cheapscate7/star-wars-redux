@@ -7,24 +7,7 @@ import { DebounceInput } from 'react-debounce-input';
 import CharacterItem from '../list_items/CharacterItem';
 import { useQuery } from '@apollo/react-hooks';
 import SearchContext from '../../../lib/withSeachContext';
-import gql from 'graphql-tag';
-
-const GET_CHARACTERS = gql`
-    query getCharacters($filter: PersonFilter) {
-        allPersons(filter: $filter) {
-            name
-            species {
-                id
-                name
-            }
-            birthYear
-            homeworld {
-                id
-                name
-            }
-        }
-    }
-`;
+import { GET_CHARACTERS } from '../../../lib/queries/starwarsQueries';
 
 /**
  * removes values of the filter with a null id
