@@ -1,5 +1,6 @@
 const withFonts = require('next-fonts');
-const debug = process.env.NODE_ENV !== 'production';
+const TerserPlugin = require('terser-webpack-plugin');
+const dev = process.env.NODE_ENV !== 'production';
 
 module.exports = withFonts({
     exportPathMap: function () {
@@ -8,6 +9,12 @@ module.exports = withFonts({
         };
     },
     env: {},
+    minimize: !dev,
+    minimizer: [
+        new TerserPlugin({
+            parallel: true,
+        }),
+    ],
     webpack(config, options) {
         /**
          * for font loading
