@@ -92,7 +92,10 @@ const CharacterListContainer: React.FC = () => {
                     title={'// Characters'}
                 >
                     <GotoButton onClick={executeScroll}>
-                        <Arrow direction={'bottom'} match={'background'} />
+                        <Arrow
+                            direction={'bottom'}
+                            match={'coloured_button_foreground'}
+                        />
                     </GotoButton>
                     {data && data.allPersons.length > 0 ? (
                         data.allPersons.map((person, index) => (
@@ -134,7 +137,7 @@ const GotoButton = styled.button`
     transition: background-color 0.3s;
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
-        color: ${theme.colors.background};
+        color: ${theme.colors.coloured_button_foreground};
         &:hover {
             background-color: ${theme.colors.highlight_1};
         }

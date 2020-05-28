@@ -8,6 +8,7 @@ const LightTheme: Theme = {
         background: 'white',
         highlight_1: '#001cd5',
         highlight_1_contrast: '#d59900',
+        coloured_button_foreground: 'white',
     },
     fontWeights: {
         light: 300,

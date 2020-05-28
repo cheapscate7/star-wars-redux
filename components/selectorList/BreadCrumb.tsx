@@ -51,7 +51,7 @@ const BreadCrumbContainer = styled.div`
     transition: background-color 0.2s ease-in-out;
     ${({ theme }) => css`
         background-color: ${rgba(theme.colors.highlight_1, 0.8)};
-        color: ${theme.colors.background};
+        color: ${theme.colors.coloured_button_foreground};
         font-family: ${theme.fonts[2] || theme.fonts[0]};
     `};
     ${({ show }) =>
@@ -80,7 +80,7 @@ const Divider = styled.span`
     transition: all 0.3s linear;
     margin: auto 0.25em;
     ${({ theme }) => css`
-        color: ${theme.colors.background};
+        color: ${theme.colors.coloured_button_foreground};
     `};
     &:only-child,
     &:last-child {
@@ -90,7 +90,7 @@ const Divider = styled.span`
 
 const BreadCrumbItem = styled.div`
     ${({ theme }) => css`
-        color: ${theme.colors.background};
+        color: ${theme.colors.coloured_button_foreground};
     `};
     &:first-child:not(:only-child) {
         margin-right: 0.5em;
@@ -114,12 +114,11 @@ const ClearButton = styled.button`
     transition: 0.2s ease-in-out;
     ${({ theme }) => css`
         background-color: ${theme.colors.highlight_1};
-        color: ${theme.colors.background};
+        color: ${theme.colors.coloured_button_foreground};
         font-weight: ${theme.fontWeights.bold};
         font-size: ${theme.fontSizes.small};
         &:hover {
             background-color: ${rgba(theme.colors.highlight_1, 0.6)};
-            color: ${theme.colors.foreground};
         }
     `};
 `;

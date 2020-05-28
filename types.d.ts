@@ -150,6 +150,7 @@ declare interface Theme {
         highlight_2?: string;
         highlight_1_contrast: string;
         highlight_2_contrast?: string;
+        coloured_button_foreground: string;
     };
     fontWeights: {
         light: number;
