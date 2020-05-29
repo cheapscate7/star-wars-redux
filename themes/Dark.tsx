@@ -2,7 +2,7 @@
  * DARK THEME
  * tries to prioritise black and dark colours as well as red to thematically represent the dark side
  */
-const LightTheme: Theme = {
+const DarkTheme: Theme = {
     colors: {
         foreground: '#eeeeee',
         background: '#2d2c2c',
@@ -31,4 +31,4 @@ const LightTheme: Theme = {
     iconDecor: '/empire.svg',
 };
 
-export default LightTheme;
+export default DarkTheme;

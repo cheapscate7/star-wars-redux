@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 
-const initialState: IWithSearchState = {
+export const initialState: IWithSearchState = {
     combinedQueryParams: {
         film: {
             id: '',

@@ -2,16 +2,16 @@ import { NextPage } from 'next';
 import apolloClient from '../apolloClient';
 import Layout from '../components/layout/Layout';
 import { withApollo } from '../lib/apollo';
-import SelectorListsContainer from '../components/selector_lists/SelectorListsContainer';
-import CharacterListContainer from '../components/character_list/CharacterListsContainer';
+import SelectorListsContainer from '../components/lists/selector_lists/SelectorListsContainer';
+import CharacterListContainer from '../components/lists/character_list/CharacterListsContainer';
 import withSearch from '../lib/withSearch';
 import React from 'react';
 import SearchContext from '../lib/withSeachContext';
 import CharacterSearchContext from '../lib/withCharacterSeachContext';
 import withCharacterSearch from '../lib/withCharacterSearch';
-import FilmList from '../components/selector_lists/lists/FilmList';
-import SpeciesList from '../components/selector_lists/lists/SpeciesList';
-import PlanetsList from '../components/selector_lists/lists/PlanetsList';
+import FilmList from '../components/lists/selector_lists/lists/FilmList';
+import SpeciesList from '../components/lists/selector_lists/lists/SpeciesList';
+import PlanetsList from '../components/lists/selector_lists/lists/PlanetsList';
 import { ALL_FILMS } from '../lib/queries/starwarsQueries';
 
 interface IHomeProps {

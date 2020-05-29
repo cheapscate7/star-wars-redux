@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Title from '../titles/Title';
-import styled, { css } from 'styled-components';
 import Head from 'next/head';
-import ThemeManagerContext from '../../lib/withThemeManagerContext';
-import { themeManagerActions } from '../../lib/withThemeManager';
+import SwitchThemeButton from '../buttons/SwitchThemeButton';
+import PageHeader from './PageHeader';
+import PageContent from './PageContent';
 
 interface ILayoutProps {
     title: string;
@@ -18,10 +18,6 @@ interface ILayoutProps {
  * @constructor
  */
 const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
-    const { themeManagerState, themeManagerDispatch } = useContext(
-        ThemeManagerContext
-    );
-
     return (
         <>
             <Head>
@@ -32,16 +28,7 @@ const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
                 <Title>
                     <h1>STARDB</h1>
                 </Title>
-                <SwitchThemeButton
-                    onClick={() =>
-                        themeManagerDispatch(themeManagerActions.toggleTheme())
-                    }
-                >
-                    Join The{' '}
-                    {themeManagerState.theme === 'light'
-                        ? 'Darkside'
-                        : 'Lightside'}
-                </SwitchThemeButton>
+                <SwitchThemeButton />
             </PageHeader>
             <PageContent>{children}</PageContent>
         </>
@@ -49,47 +36,3 @@ const Layout: React.FC<ILayoutProps> = ({ title, description, children }) => {
 };
 
 export default Layout;
-
-const PageHeader = styled.nav`
-    color: white;
-    padding: 2em 1em;
-    border-bottom: 1px solid #777777;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @media (max-width: 320px) {
-        flex-direction: column;
-        justify-content: space-between;
-        > *:first-child {
-            margin-bottom: 0.5em;
-        }
-        > *:last-child {
-            margin-top: 0.5em;
-        }
-    }
-`;
-
-const PageContent = styled.main`
-    max-width: 73rem;
-    margin: auto;
-    //this is so the character list goto button doesnt cover up any of the last item of the list
-    margin-bottom: 4em;
-`;
-
-const SwitchThemeButton = styled.button`
-    cursor: pointer;
-    padding: 1em 1.5em;
-    outline: none;
-    transition: 0.2s ease-in-out;
-    ${({ theme }) => css`
-        font-family: ${theme.fonts[1] || theme.fonts[0]};
-        color: ${theme.colors.foreground};
-        border: 1px solid ${theme.colors.foreground};
-        background-color: ${theme.colors.background};
-        &:focus,
-        &:hover {
-            border: 1px solid ${theme.colors.highlight_1};
-        }
-    `};
-`;
