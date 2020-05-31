@@ -2,8 +2,13 @@ import React from 'react';
 import BreadCrumb from './BreadCrumb';
 import Container from '../shared/Container';
 import ListGroups from '../shared/ListGroups';
-import SearchContext from '../../../lib/withSeachContext';
+import { useSearchState } from '../../../lib/withSearch';
 
+/**
+ * find a component in the children prop based on a key
+ * @param key
+ * @param children
+ */
 const getComponent = (key, children) => {
     return children.filter((comp) => {
         return comp.key === key;
@@ -27,7 +32,7 @@ const SelectorListsContainer: React.FC<ISelectorListsContainerProps> = ({
     childLists,
     children,
 }) => {
-    const { searchState } = React.useContext(SearchContext);
+    const searchState = useSearchState(); //selected Film, Species, Planet
     const { combinedQueryParams } = searchState;
 
     return (

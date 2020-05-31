@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchContext from '../../lib/withSeachContext';
-import { searchActions } from '../../lib/withSearch';
+import { searchActions, useSearchDispatch } from '../../lib/withSearch';
 import TransparentButton from './TransparentButton';
 import Arrow from '../icons/Arrow';
 
@@ -10,7 +10,7 @@ interface IAddFilmButton {
 }
 
 const AddFilmButton: React.FC<IAddFilmButton> = ({ film, selected }) => {
-    const { searchDispatch } = React.useContext(SearchContext);
+    const searchDispatch = useSearchDispatch();
 
     const handleClick = () => {
         searchDispatch(

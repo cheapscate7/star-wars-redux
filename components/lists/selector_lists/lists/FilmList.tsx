@@ -1,13 +1,13 @@
 import FilmItem from '../list_items/FilmItem';
 import SelectorList from './SelectorList';
 import React from 'react';
-import SearchContext from '../../../../lib/withSeachContext';
+import { useSearchState } from '../../../../lib/withSearch';
 
 interface IFilmListProps {
     data: IGetFilmsQuery;
 }
 const FilmList: React.FC<IFilmListProps> = ({ data }) => {
-    const { searchState } = React.useContext(SearchContext);
+    const searchState = useSearchState(); //selected Film, Species, Planet
     const { combinedQueryParams } = searchState;
 
     return (

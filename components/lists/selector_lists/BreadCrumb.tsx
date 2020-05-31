@@ -1,8 +1,11 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
 import { rgba } from 'polished';
-import SearchContext from '../../../lib/withSeachContext';
-import { searchActions } from '../../../lib/withSearch';
+import {
+    searchActions,
+    useSearchDispatch,
+    useSearchState,
+} from '../../../lib/withSearch';
 import removeUndefined from '../../../lib/helpers/arrays';
 
 /**
@@ -11,7 +14,8 @@ import removeUndefined from '../../../lib/helpers/arrays';
  * @constructor
  */
 const BreadCrumb: React.FC = () => {
-    const { searchState, searchDispatch } = React.useContext(SearchContext);
+    const searchState = useSearchState(); //selected Film, Species, Planet
+    const searchDispatch = useSearchDispatch();
     const { combinedQueryParams } = searchState;
 
     const items = removeUndefined([

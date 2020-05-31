@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
-import ThemeManagerContext from '../../lib/withThemeManagerContext';
+import React from 'react';
 import BorderedButton from './BorderedButton';
-import { themeManagerActions } from '../../lib/withThemeManager';
+import {
+    themeManagerActions,
+    useThemeManagerDispatch,
+    useThemeManagerState,
+} from '../../lib/withThemeManager';
 
 const SwitchThemeButton = () => {
-    const { themeManagerState, themeManagerDispatch } = useContext(
-        ThemeManagerContext
-    );
+    const themeManagerState = useThemeManagerState();
+    const themeManagerDispatch = useThemeManagerDispatch();
 
     const { theme } = themeManagerState;
 

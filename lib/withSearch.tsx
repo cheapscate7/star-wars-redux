@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 export const initialState: IWithSearchState = {
     combinedQueryParams: {
@@ -121,13 +121,39 @@ function reducer(state: IWithSearchState, action: IAction): IWithSearchState {
     }
 }
 
-const withSearch = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+const SearchStateContext = React.createContext<Partial<IWithSearchState>>(
+    initialState
+);
+const SearchDispatchContext = React.createContext(null);
 
-    return {
-        searchState: state,
-        searchDispatch: dispatch,
-    };
+export const SearchProvider: React.FC = ({ children }) => {
+    const [searchState, searchDispatch] = useReducer(reducer, initialState);
+
+    return (
+        <SearchStateContext.Provider value={searchState}>
+            <SearchDispatchContext.Provider value={searchDispatch}>
+                {children}
+            </SearchDispatchContext.Provider>
+        </SearchStateContext.Provider>
+    );
 };
 
-export default withSearch;
+export const useSearchState = () => {
+    const context = React.useContext(SearchStateContext);
+    if (context === undefined) {
+        throw new Error('useSearchState must be used within a SearchProvider');
+    } else {
+        return context;
+    }
+};
+
+export const useSearchDispatch = () => {
+    const context = React.useContext(SearchDispatchContext);
+    if (context === undefined) {
+        throw new Error(
+            'useSearchDispatch must be used within a SearchProvider'
+        );
+    } else {
+        return context;
+    }
+};

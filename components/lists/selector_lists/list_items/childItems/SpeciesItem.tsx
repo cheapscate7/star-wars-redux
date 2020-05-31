@@ -1,7 +1,9 @@
-import { searchActions } from '../../../../../lib/withSearch';
+import {
+    searchActions,
+    useSearchDispatch,
+} from '../../../../../lib/withSearch';
 import Item from './Item';
 import React from 'react';
-import SearchContext from '../../../../../lib/withSeachContext';
 
 interface SpeciesItemProps extends IListItemProps {
     species: ISpecies;
@@ -19,7 +21,7 @@ const SpeciesItem: React.FC<SpeciesItemProps> = ({
     selected,
     children,
 }) => {
-    const { searchDispatch } = React.useContext(SearchContext);
+    const searchDispatch = useSearchDispatch();
 
     const handleClick = () => {
         searchDispatch(

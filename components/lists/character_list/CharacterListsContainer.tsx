@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import ListGroups from '../shared/ListGroups';
 import CharacterList from './lists/CharacterList';
-import SearchContext from '../../../lib/withSeachContext';
 import GotoButton from '../../buttons/GotoButton';
+import { useSearchState } from '../../../lib/withSearch';
 
 /**
  * Handles rendering lists of characters
@@ -10,14 +10,15 @@ import GotoButton from '../../buttons/GotoButton';
  * @constructor
  */
 const CharacterListContainer: React.FC = () => {
-    const { searchState } = React.useContext(SearchContext); //selected Film, Species, Planet
+    const searchState = useSearchState(); //selected Film, Species, Planet
+    const { combinedQueryParams } = searchState;
 
     //allows a button to scroll to character results
     const characterListRef = useRef(null);
 
     return (
         <ListGroups>
-            {searchState.combinedQueryParams.film.id && (
+            {combinedQueryParams.film.id && (
                 <>
                     <CharacterList
                         jumpTo={characterListRef}

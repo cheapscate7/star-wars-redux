@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 const initialState: IWithCharacterSearchState = {
     characters: [],
@@ -74,13 +74,46 @@ function reducer(
     }
 }
 
-const withCharacterSearch = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+const CharacterSearchStateContext = React.createContext<
+    Partial<IWithCharacterSearchState>
+>(initialState);
+const CharacterSearchDispatchContext = React.createContext(null);
 
-    return {
-        characterSearchState: state,
-        characterSearchDispatch: dispatch,
-    };
+export const CharacterSearchProvider: React.FC = ({ children }) => {
+    const [characterSearchState, characterSearchDispatch] = useReducer(
+        reducer,
+        initialState
+    );
+
+    return (
+        <CharacterSearchStateContext.Provider value={characterSearchState}>
+            <CharacterSearchDispatchContext.Provider
+                value={characterSearchDispatch}
+            >
+                {children}
+            </CharacterSearchDispatchContext.Provider>
+        </CharacterSearchStateContext.Provider>
+    );
 };
 
-export default withCharacterSearch;
+export const useCharacterSearchState = () => {
+    const context = React.useContext(CharacterSearchStateContext);
+    if (context === undefined) {
+        throw new Error(
+            'useCharacterSearchState must be used within a CharacterSearchProvider'
+        );
+    } else {
+        return context;
+    }
+};
+
+export const useCharacterSearchDispatch = () => {
+    const context = React.useContext(CharacterSearchDispatchContext);
+    if (context === undefined) {
+        throw new Error(
+            'useCharacterSearchDispatch must be used within a CharacterSearchProvider'
+        );
+    } else {
+        return context;
+    }
+};

@@ -1,15 +1,18 @@
 import React from 'react';
 import LoadingElement from '../../../loading/LoadingElement';
-import CharacterSearchContext from '../../../../lib/withCharacterSeachContext';
-import { characterSearchActions } from '../../../../lib/withCharacterSearch';
+import {
+    characterSearchActions,
+    useCharacterSearchDispatch,
+    useCharacterSearchState,
+} from '../../../../lib/withCharacterSearch';
 import { DebounceInput } from 'react-debounce-input';
 import CharacterItem from '../list_items/CharacterItem';
 import { useQuery } from '@apollo/react-hooks';
-import SearchContext from '../../../../lib/withSeachContext';
 import { GET_CHARACTERS } from '../../../../lib/queries/starwarsQueries';
 import Container from '../Container';
 import List from './List';
 import Search from '../Search';
+import { useSearchState } from '../../../../lib/withSearch';
 
 /**
  * removes values of the filter with a null id
@@ -31,11 +34,10 @@ const buildFilter = (filter) => {
  * @constructor
  */
 const CharacterList: React.FC<IListProps> = ({ jumpTo, title, children }) => {
-    const { searchState } = React.useContext(SearchContext); //selected Film, Species, Planet
+    const searchState = useSearchState(); //selected Film, Species, Planet
+    const characterSearchState = useCharacterSearchState();
+    const characterSearchDispatch = useCharacterSearchDispatch();
     const { combinedQueryParams } = searchState;
-    const { characterSearchState, characterSearchDispatch } = React.useContext(
-        CharacterSearchContext
-    );
 
     const updateSearchTerm = (event) => {
         characterSearchDispatch(

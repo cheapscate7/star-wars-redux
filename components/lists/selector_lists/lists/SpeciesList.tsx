@@ -2,11 +2,11 @@ import React from 'react';
 import SpeciesItem from '../list_items/childItems/SpeciesItem';
 import SelectorList from './SelectorList';
 import { useQuery } from '@apollo/react-hooks';
-import SearchContext from '../../../../lib/withSeachContext';
 import { GET_SPECIES } from '../../../../lib/queries/starwarsQueries';
+import { useSearchState } from '../../../../lib/withSearch';
 
 const SpeciesList: React.FC = () => {
-    const { searchState } = React.useContext(SearchContext);
+    const searchState = useSearchState(); //selected Film, Species, Planet
     const { combinedQueryParams } = searchState;
 
     const { data, loading } = useQuery<

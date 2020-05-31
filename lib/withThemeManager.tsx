@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 interface IWithThemeManagerState {
     theme: string;
@@ -47,13 +47,44 @@ function reducer(
     }
 }
 
-const withThemeManager = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+const ThemeManagerStateContext = React.createContext<
+    Partial<IWithThemeManagerState>
+>(initialState);
+const ThemeManagerDispatchContext = React.createContext(null);
 
-    return {
-        themeManagerState: state,
-        themeManagerDispatch: dispatch,
-    };
+export const ThemeManagerProvider: React.FC = ({ children }) => {
+    const [themeManagerState, themeManagerDispatch] = useReducer(
+        reducer,
+        initialState
+    );
+
+    return (
+        <ThemeManagerStateContext.Provider value={themeManagerState}>
+            <ThemeManagerDispatchContext.Provider value={themeManagerDispatch}>
+                {children}
+            </ThemeManagerDispatchContext.Provider>
+        </ThemeManagerStateContext.Provider>
+    );
 };
 
-export default withThemeManager;
+export const useThemeManagerState = () => {
+    const context = React.useContext(ThemeManagerStateContext);
+    if (context === undefined) {
+        throw new Error(
+            'useThemeManagerState must be used within a ThemeManagerProvider'
+        );
+    } else {
+        return context;
+    }
+};
+
+export const useThemeManagerDispatch = () => {
+    const context = React.useContext(ThemeManagerDispatchContext);
+    if (context === undefined) {
+        throw new Error(
+            'useThemeManagerDispatch must be used within a ThemeManagerProvider'
+        );
+    } else {
+        return context;
+    }
+};

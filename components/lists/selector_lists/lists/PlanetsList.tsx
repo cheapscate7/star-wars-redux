@@ -1,12 +1,12 @@
 import PlanetItem from '../list_items/childItems/PlanetItem';
 import SelectorList from './SelectorList';
 import React from 'react';
-import SearchContext from '../../../../lib/withSeachContext';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PLANETS } from '../../../../lib/queries/starwarsQueries';
+import { useSearchState } from '../../../../lib/withSearch';
 
 const PlanetsList: React.FC = () => {
-    const { searchState } = React.useContext(SearchContext);
+    const searchState = useSearchState(); //selected Film, Species, Planet
     const { combinedQueryParams } = searchState;
 
     const { data, loading } = useQuery<

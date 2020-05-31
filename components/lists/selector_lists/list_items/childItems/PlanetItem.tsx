@@ -1,9 +1,11 @@
-import { searchActions } from '../../../../../lib/withSearch';
+import {
+    searchActions,
+    useSearchDispatch,
+} from '../../../../../lib/withSearch';
 import Item from './Item';
 import React from 'react';
-import SearchContext from '../../../../../lib/withSeachContext';
 
-interface SpeciesItemProps extends IListItemProps {
+interface PlanetItemProps extends IListItemProps {
     planet: IPlanet;
 }
 
@@ -14,12 +16,12 @@ interface SpeciesItemProps extends IListItemProps {
  * @param children  type: DocumentNode
  * @constructor
  */
-const PlanetItem: React.FC<SpeciesItemProps> = ({
+const PlanetItem: React.FC<PlanetItemProps> = ({
     planet,
     selected,
     children,
 }) => {
-    const { searchDispatch } = React.useContext(SearchContext);
+    const searchDispatch = useSearchDispatch();
 
     const handleClick = () => {
         searchDispatch(
