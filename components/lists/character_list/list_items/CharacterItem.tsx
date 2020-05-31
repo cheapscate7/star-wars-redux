@@ -23,17 +23,21 @@ const CharacterItem: React.FC<CharacterItemProps> = ({
         <ListItem className={selected && 'active'}>
             {children ? (
                 <div>
-                    <h3>{children}</h3>
+                    <h3 data-testid={'character--children'}>{children}</h3>
                 </div>
             ) : (
                 <div>
-                    <h3>{character.name || ''}</h3>
-                    <h4>
+                    <h3 data-testid={'character--name'}>
+                        {character.name || ''}
+                    </h3>
+                    <h4 data-testid={'character--home'}>
                         {(character.homeworld && character.homeworld.name) ||
                             '???'}{' '}
-                        <Italics>- {character.birthYear || '???BBY'}</Italics>
+                        <Italics data-testid={'character--birthyear'}>
+                            - {character.birthYear || '???BBY'}
+                        </Italics>
                     </h4>
-                    <p>
+                    <p data-testid={'character--species'}>
                         {character.species.length > 0
                             ? character.species[0].name || ''
                             : '???'}

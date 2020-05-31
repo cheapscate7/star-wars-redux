@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchContext from '../../lib/withSeachContext';
 import { searchActions, useSearchDispatch } from '../../lib/withSearch';
 import TransparentButton from './TransparentButton';
 import Arrow from '../icons/Arrow';
