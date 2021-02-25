@@ -6,6 +6,10 @@
 
 An example of using [swapi.graph.cool](https://swapi.graph.cool/) to call a list of Star Wars characters based on film, species, and planet.
 
+### UPDATE:
+
+This project no longer works as the Graphql api has been taken offline
+
 ## Usage
 
 -   Select a film
