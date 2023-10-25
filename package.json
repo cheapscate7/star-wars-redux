@@ -39,7 +39,7 @@
         "apollo-link-http": "1.5.16",
         "graphql": "^14.0.2",
         "graphql-tag": "2.10.3",
-        "next": "9.3.5",
+        "next": "13.5.0",
         "next-fonts": "^1.1.0",
         "node-fetch": "^2.6.0",
         "null-loader": "^4.0.0",
